@@ -1,6 +1,11 @@
 from flask import Flask,render_template,request,session
 from pymongo import MongoClient
 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+
 cluster=MongoClient("127.0.0.1:27017")
 
 db=cluster['healthrecords']
@@ -11,6 +16,7 @@ admin=db['admin']
 
 from flask import Flask;
 app = Flask(__name__)
+MONGO_URI = os.getenv("MONGO_URI")
 
 app.secret_key="akhil"
 
