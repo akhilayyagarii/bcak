@@ -1,26 +1,22 @@
-from flask import Flask,render_template,request,session
+from flask import Flask, render_template, request, session,redirect, url_for
 from pymongo import MongoClient
-
 from dotenv import load_dotenv
 import os
+
 load_dotenv()
-
-
-from flask import Flask;
 app = Flask(__name__)
+app.secret_key = "akhil"
+
 MONGO_URI = os.getenv("MONGO_URI")
-
-app.secret_key="akhil"
-
-
 client = MongoClient(MONGO_URI)
 
 
-db=client['healthrecords']
-#collection for login details
-patients=db['patients']
-records=db["records"]
-admin=db['admin']
+
+
+db = client['healthrecords']
+patients = db['patients']
+records = db['records']
+admin = db['admin']
 
 
 
@@ -28,9 +24,11 @@ admin=db['admin']
 def home():
   return render_template("welcome.html")
 
-@app.route("/doclogin")
-def doclogin():
-  return render_template("doctorlogin.html")
+
+
+@app.route("/doctorlogin", methods=["GET"])
+def doctorlogin_form():
+    return render_template("doctorlogin.html")
 
 @app.route("/docsignup")
 def docsignup():
@@ -38,7 +36,10 @@ def docsignup():
 
 @app.route("/adminhome")
 def adminhome():
-  return render_template("admin.html")
+    if session.get('role') != 'admin':
+        return redirect(url_for('doctorlogin'))
+    return render_template("admin.html")
+
 
 @app.route("/login")
 def login():
@@ -199,16 +200,27 @@ def doctorsignup():
   admin.insert_one({"name":a,"email":b,"hospitaname":c,"password":d})
   return render_template("doctorlogin.html")
 
-
-#admin login page
-@app.route("/doctorlogin",methods=['post'])
+@app.route("/doctorlogin", methods=["POST"])
 def doctorlogin():
-  a=request.form.get("email")
-  b=request.form.get("password")
-  user=admin.find_one({"email":a})
-  if user['password']==b:
-    return render_template("admin.html")
-  return render_template("doctorlogin.html",status="Invalid credentials")
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    # ✅ Check admin credentials from MongoDB, not hardcoded
+    admin_user = admin.find_one({"email": email, "password": password})
+
+    if admin_user:
+        session['email'] = email
+        session['role'] = 'admin'
+        print("✅ Login successful")
+        return redirect(url_for("adminhome"))
+
+    print("❌ Login failed")
+    return render_template("doctorlogin.html", status="Invalid credentials")
+
+
+
+
+
 
 #view records
 @app.route("/patient records")
