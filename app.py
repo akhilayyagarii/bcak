@@ -6,19 +6,23 @@ import os
 load_dotenv()
 
 
-cluster=MongoClient("127.0.0.1:27017")
-
-db=cluster['healthrecords']
-#collection for login details
-patients=db['patients']
-records=db["records"]
-admin=db['admin']
-
 from flask import Flask;
 app = Flask(__name__)
 MONGO_URI = os.getenv("MONGO_URI")
 
 app.secret_key="akhil"
+
+
+client = MongoClient(MONGO_URI)
+
+
+db=client['healthrecords']
+#collection for login details
+patients=db['patients']
+records=db["records"]
+admin=db['admin']
+
+
 
 @app.route("/")
 def home():
