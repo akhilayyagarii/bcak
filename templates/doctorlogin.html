@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor Login</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+        padding: 0 10%;
+      }
+      .login-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        max-width: 1200px;
+      }
+      .left-side {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .right-side {
+        flex: 1;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+      }
+      .right-side h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+      .right-side input[type="email"],
+      .right-side input[type="password"] {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .right-side button {
+        width: 100%;
+        padding: 15px;
+        background-color: #00adef;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      .right-side button:hover {
+        background-color: #007bbf;
+      }
+      .alt-login {
+        margin: 15px 0;
+        text-align: center;
+      }
+      .alt-login a {
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 14px;
+        color: #333;
+      }
+      .alt-login a:hover {
+        text-decoration: underline;
+      }
+      .help-link {
+        text-align: right;
+        margin-top: 5px;
+      }
+      .help-link a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #007bbf;
+      }
+      .help-link a:hover {
+        text-decoration: underline;
+      }
+      .doctor-welcome {
+        font-size: 32px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+      .tagline {
+        font-size: 16px;
+        margin-bottom: 30px;
+      }
+      .remember-me {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .remember-me input {
+        margin-right: 10px;
+      }
+      /* Left side illustration area */
+      .left-side img {
+        max-width: 100%;
+        height: auto;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 12px;
+        color: #666;
+      }
+      .terms-link {
+        color: #007bbf;
+        text-decoration: none;
+      }
+      .terms-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Left Side (Illustration) -->
+      <div class="left-side">
+        <img src="../static/assets/images/doclogin.jpg" alt="Doctors Illustration" />
+      </div>
+
+      <!-- Right Side (Login Form) -->
+      <div class="right-side">
+        <h2 class="doctor-welcome">Welcome Back Doctor!</h2>
+        <p class="tagline">Let’s get you logged in</p>
+        <form action="/doctorlogin" method="post">
+          <input type="email" name="email" placeholder="Email" required />
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+
+          <div class="remember-me">
+            <input type="checkbox" name="remember" />
+            <label for="remember">Remember Me!</label>
+          </div>
+
+          <button type="submit">Login</button>
+
+          <div class="help-link">
+            <a href="/docsignup">signup</a>
+          </div>
+        </form>
+
+        <!-- Alternative Login Options -->
+        <div class="alt-login">
+          <a href="#">Login with Google</a>
+        </div>
+
+        <div class="footer">
+          <p>All Rights are Reserved</p>
+          <a href="#" class="terms-link">Terms and Conditions</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Records</title>
+    <style>
+        form {
+            display: flex;
+            justify-content: center;
+            margin: 20px;
+        }
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Records</h1>
+    <!-- Search Form -->
+    <form method="GET" action="/admincard">
+        <input type="text" name="query" placeholder="Search by name or email" required>
+        <button type="submit">Search</button>
+      </form>
+      
+
+        <h2>Search Results:</h2>
+        <table>
+            {% for record in records %}
+              <tr><th>Name</th><td>{{ record['name'] }}</td></tr>
+              <tr><th>Email</th><td>{{ record['email'] }}</td></tr>
+              <tr><th>Phone</th><td>{{ record['phone'] }}</td></tr>
+              <tr><th>Blood Group</th><td>{{ record['blood-type'] }}</td></tr>
+              <tr><th>Sugar Level</th><td>{{ record['sugar-level'] }}</td></tr>
+              <tr><th>Blood Pressure</th><td>{{ record['bp-systolic'] }}/{{ record['bp-diastolic'] }}</td></tr>
+              <tr><th>Past Operations</th><td>{{ record['past-operations-number'] }}</td></tr>
+              <tr><th>Operation Details</th><td>{{ record['operation-details'] }}</td></tr>
+              <tr><td colspan="2"><hr></td></tr>
+            {% endfor %}
+          </table>
+          
+  
+</body>
+</html>

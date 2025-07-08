@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us</title>
+    <style>
+            /* Basic Styling for Sections */
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0;
+              padding: 0;
+            }
+            header {
+              background-color: #0a0a0a;
+              padding: 20px 0;
+              color: rgb(248, 245, 245);
+            }
+
+            .navbar {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 50px;
+            }
+
+            .logo {
+              font-size: 1.8rem;
+              font-weight: bold;
+            }
+
+            nav ul {
+              list-style-type: none;
+              display: flex;
+            }
+
+            nav ul li {
+              display: inline;
+              margin-left: 20px;
+            }
+
+            nav ul li a {
+              color: rgb(254, 253, 253);
+              text-decoration: none;
+              font-size: 1.1rem;
+            }
+
+            /* Dropdown styling */
+            .dropdown {
+              position: relative;
+              display: inline-block;
+            }
+
+            .dropdown-btn {
+              background-color: #f1f1f1;
+              border: none;
+              color: black;
+              padding: 10px 16px;
+              font-size: 16px;
+              cursor: pointer;
+            }
+
+            .dropdown-content {
+              display: none;
+              position: absolute;
+              background-color: #fff;
+              box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+              z-index: 1;
+              width: 200px;
+            }
+
+            .dropdown-content a {
+              color: black;
+              padding: 12px 16px;
+              text-decoration: none;
+              display: block;
+            }
+
+            .dropdown:hover .dropdown-content {
+              display: block;
+            }
+
+            .dropdown-content a:hover {
+              background-color: #f1f1f1;
+            }
+
+            .navbar-right {
+              display: flex;
+              align-items: center;
+            }
+
+            section {
+              padding: 50px 20px;
+              text-align: center;
+            }
+
+            section h2 {
+              font-size: 2.5em;
+              margin-bottom: 20px;
+            }
+
+            section p {
+              font-size: 1.2em;
+              line-height: 1.6;
+              max-width: 800px;
+              margin: 0 auto;
+            }
+
+            /* About Us Section with Background Image */
+            #about-us {
+              background-image: url("https://xtentertainment.com/wp-content/uploads/2015/03/Contact-us-Background.jpg");
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              color: white;
+            }
+
+            /* Advantages Section */
+            #advantages {
+              background-color: #ffffff;
+            }
+
+            .advantages-container {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 20px; /* Reduced gap between boxes */
+              max-width: 1200px;
+              margin: 0 auto;
+            }
+
+      .advantage-card {
+        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background to see the blur */
+        border-radius: 8px;
+        padding: 15px; /* Reduced padding */
+        width: 200px; /* Reduced width */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s forwards;
+        position: relative;
+        color: black; /* Black text color */
+      }
+
+      /* Overlay effect for blurring */
+      .advantage-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
+        border-radius: 8px;
+        backdrop-filter: blur(4px); /* Blur effect */
+      }
+
+      /* Ensure text and headings are visible */
+      .advantage-card h3,
+      .advantage-card p {
+        position: relative;
+        z-index: 1;
+        color: black; /* Ensure text is black */
+      }
+
+            }
+
+            /* Adding background to 'Our Mission' card */
+            .advantage-card.mission {
+              background-image: url("https://www.projectmanager.com/wp-content/uploads/2018/11/181112_Blog_Feature_Mission.jpg");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'Our Vision' card */
+            .advantage-card.vision {
+              background-image: url("https://www.projectmanager.com/wp-content/uploads/2018/05/181126_Blog_Feature_Vision_Statement.jpg");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'User Experience' card */
+            .advantage-card.user-experience {
+              background-image: url("https://st2.depositphotos.com/2801893/10799/v/950/depositphotos_107999614-stock-illustration-user-experience-concept.jpg");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'Privacy & Security' card */
+            .advantage-card.privacy-security {
+              background-image: url("https://www.imprivata.com/sites/imprivata/files/fairwarning/5-Ways-to-Create-a-Culture-of-Patient-Data-Privacy-in-Healthcare.png");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'Seamless Integration' card */
+            .advantage-card.seamless-integration {
+              background-image: url("https://as1.ftcdn.net/v2/jpg/01/08/52/08/1000_F_108520851_XUodFZmKfUmPuBVLyAMkYFrY482zYccw.jpg");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'Customizable Plans' card */
+            .advantage-card.customizable-plans {
+              background-image: url("https://c8.alamy.com/comp/2K4WWPT/sign-displaying-health-plan-word-written-on-type-of-insurance-that-covers-highcost-medical-services-2K4WWPT.jpg");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Adding background to 'Advanced Analytics' card */
+            .advantage-card.advanced-analytics {
+              background-image: url("https://mitsind.com/wp-content/uploads/2017/11/Advanced-Analytics.png");
+              background-size: cover;
+              background-position: center;
+              color: white;
+            }
+
+            /* Text overlay effect for better readability */
+            .advantage-card::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+              border-radius: 8px;
+            }
+
+            .advantage-card h3,
+            .advantage-card p {
+              position: relative; /* To display over the overlay */
+              z-index: 1;
+            }
+
+            /* Adding delay for each card to stagger animations */
+            .advantage-card:nth-child(1) {
+              animation-delay: 0.2s;
+            }
+            .advantage-card:nth-child(2) {
+              animation-delay: 0.4s;
+            }
+            .advantage-card:nth-child(3) {
+              animation-delay: 0.6s;
+            }
+            .advantage-card:nth-child(4) {
+              animation-delay: 0.8s;
+            }
+            .advantage-card:nth-child(5) {
+              animation-delay: 1s;
+            }
+            .advantage-card:nth-child(6) {
+              animation-delay: 1.2s;
+            }
+            .advantage-card:nth-child(7) {
+              animation-delay: 1.4s;
+            }
+
+            /* Animation keyframes */
+            @keyframes fadeInUp {
+              0% {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              100% {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+
+            /* Footer with Team Pics */
+            footer {
+              background-color: #000000;
+              color: #fff;
+              padding: 50px 20px;
+            }
+
+            .team {
+              text-align: center;
+            }
+
+            .team h2 {
+              font-size: 2.5em;
+              margin-bottom: 20px;
+            }
+
+            .team-pics {
+              display: flex;
+              justify-content: center;
+              flex-wrap: wrap;
+              gap: 30px;
+            }
+
+            .team-member {
+              text-align: center;
+            }
+
+            .team-member img {
+              width: 150px;
+              height: 150px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
+            .team-member p {
+              margin-top: 10px;
+              font-size: 1.2em;
+            }
+
+            .copyright {
+              margin-top: 20px;
+              font-size: 0.9em;
+              color: #ccc; /* Lighter color for copyright text */
+              text-align: center;
+            }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">MEDICAL</div>
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/patient records">Patient Records</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <!-- Username and Dropdown on the right side -->
+       
+      </div>
+    </header>
+    <!-- About Us Section -->
+    <section id="about-us">
+      <h2>About Us</h2>
+      <p>
+        We are a dedicated team committed to improving health management
+        solutions. Our goal is to provide users with the tools they need to
+        efficiently track and manage their health data, empowering them to live
+        healthier lives. With a focus on user experience, privacy, and
+        innovation, we aim to revolutionize the way people interact with their
+        health information.
+      </p>
+    </section>
+
+    <!-- Advantages Section (As Cards) -->
+    <section id="advantages">
+      <h2>Advantages of Our Project</h2>
+      <div class="advantages-container">
+        <div class="advantage-card mission">
+          <h3>Our Mission</h3>
+          <p>
+            To provide innovative health management tools that empower
+            individuals to take control of their well-being, enhancing personal
+            health tracking and simplifying the management of health data.
+          </p>
+        </div>
+        <div class="advantage-card vision">
+          <h3>Our Vision</h3>
+          <p>
+            We envision a world where people have easy access to their health
+            data, enabling them to make informed decisions and lead healthier
+            lives.
+          </p>
+        </div>
+        <div class="advantage-card user-experience">
+          <h3>User Experience</h3>
+          <p>
+            Enhanced user experience through an intuitive interface that
+            simplifies health data tracking.
+          </p>
+        </div>
+        <div class="advantage-card privacy-security">
+          <h3>Privacy & Security</h3>
+          <p>Increased privacy and security for users' personal health data.</p>
+        </div>
+        <div class="advantage-card seamless-integration">
+          <h3>Seamless Integration</h3>
+          <p>
+            Seamless integration with existing health management systems and
+            wearable devices.
+          </p>
+        </div>
+        <div class="advantage-card customizable-plans">
+          <h3>Customizable Plans</h3>
+          <p>
+            Customizable health plans and analytics for personalized health
+            management.
+          </p>
+        </div>
+        <div class="advantage-card advanced-analytics">
+          <h3>Advanced Analytics</h3>
+          <p>
+            Our advanced analytics help identify trends and provide actionable
+            insights for better health outcomes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="team">
+        <h2>Our Team</h2>
+        <div class="team-pics">
+          <div class="team-member">
+            <img alt="Team Member 1" />
+            <p>akhil</p>
+          </div>
+          <div class="team-member">
+            <img alt="Team Member 2" />
+            <p>chandhu</p>
+          </div>
+          <div class="team-member">
+            <img alt="Team Member 6" />
+            <p>mahalakshmi</p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2024 Health Management Project. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

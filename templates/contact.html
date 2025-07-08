@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f8f8f8;
+      }
+
+      /* Navbar and Header Styling */
+      header {
+        background-color: #111111;
+        padding: 20px 0;
+        color: white;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+      }
+
+      nav ul li {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+      /* Dropdown Styling */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-btn {
+        background-color: #f1f1f1;
+        border: none;
+        color: black;
+        padding: 10px 16px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        width: 200px;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .navbar-right {
+        display: flex;
+        align-items: center;
+      }
+
+      /* Partnerships and Contact Us Styling */
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .partnership-section {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #f0f0f0;
+      }
+
+      .partnership-header {
+        margin-bottom: 40px;
+      }
+
+      .icon img {
+        width: 50px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 18px;
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .cta-button {
+        padding: 15px 25px;
+        font-size: 18px;
+        color: #6a24db;
+        border: 2px solid #6a24db;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: #6a24db;
+        color: white;
+      }
+
+      .partners-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+      }
+
+      .partner-card {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        color: white;
+      }
+
+      .partner-card img {
+        width: 100px;
+        margin-bottom: 15px;
+      }
+
+      .partner-label {
+        font-size: 16px;
+        color: #35c6f1;
+        font-weight: bold;
+      }
+
+      .partner-role {
+        font-size: 18px;
+        color: #333;
+      }
+
+      .partner-description {
+        font-size: 14px;
+        color: #777;
+        margin-top: 10px;
+      }
+
+      .contact-container {
+        background-color: #333;
+        padding: 50px 20px;
+        text-align: center;
+        margin-bottom: 50px;
+        color: #fff;
+      }
+
+      .contact-container h2 {
+        font-size: 32px;
+        color: #f0f0f0;
+        margin-bottom: 20px;
+      }
+
+      .contact-container p {
+        font-size: 18px;
+        color: #ddd;
+        line-height: 1.6;
+        margin-bottom: 30px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 40px;
+      }
+
+      .contact-info div {
+        margin: 20px;
+        font-size: 18px;
+        text-align: left;
+      }
+
+      .contact-info div i {
+        margin-right: 10px;
+        color: #6a24db;
+      }
+
+      .message {
+        font-weight: bold;
+        color: #6a24db;
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      .social-media {
+        margin-top: 30px;
+      }
+
+      .social-media a {
+        margin: 0 10px;
+        font-size: 24px;
+        color: white;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .social-media a:hover {
+        color: #6a24db;
+      }
+    </style>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">MEDICAL</div>
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/patient records">Patient Records</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <!-- Username and Dropdown on the right side -->
+      </div>
+    </header>
+
+    <!-- The rest of your page content goes here -->
+    <!-- Partnerships Section -->
+    <section class="partnership-section">
+      <div class="container">
+        <div class="partnership-header">
+          <div class="icon">
+            <img src="/image/" alt="Partnership Icon" />
+          </div>
+          <h1>Partnerships</h1>
+          <p>
+            Our vision is to make healthcare convenient across the board. If you
+            are an organization or establishment that can contribute to our
+            cause, please reach out to partner with us.
+          </p>
+          <p>
+            We believe in collaboration and mutual growth. Our partners play a
+            crucial role in enhancing the quality and accessibility of
+            healthcare services. Together, we can create innovative solutions
+            that benefit our communities.
+          </p>
+          <a href="#" class="cta-button">Get In Touch</a>
+        </div>
+        <div class="partners-grid">
+          <div
+            class="partner-card"
+            style="
+              background-image: url('https://www.massgeneralbrigham.org/content/mgb-global/global/en/patient-care/international/about/massachusetts-general-hospital/jcr%3acontent/root/container_924996778/hero_banner.coreimg.jpeg/1687464803880/international-mgh-building-1448x1110.jpeg');
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <p class="partner-label">PARTNER</p>
+            <p class="partner-role">Hospitals</p>
+            <p class="partner-description">
+              Collaborating with hospitals to ensure our patients receive timely
+              and efficient care through seamless referrals and coordinated
+              services.
+            </p>
+          </div>
+          <div
+            class="partner-card"
+            style="
+              background-image: url('https://thumbs.dreamstime.com/b/insurance-company-headquartered-19172538.jpg');
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <p class="partner-label">PARTNER</p>
+            <p class="partner-role">Insurance Companies</p>
+            <p class="partner-description">
+              Partnering with insurance providers to offer affordable healthcare
+              plans that meet the needs of our patients.
+            </p>
+          </div>
+          <div
+            class="partner-card"
+            style="
+              background-image: url('https://emchealth.in/wp-content/uploads/2022/04/Laboratories.jpg');
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <p class="partner-label">PARTNER</p>
+            <p class="partner-role">Medical Laboratories</p>
+            <p class="partner-description">
+              Working with medical labs to provide accurate and timely
+              diagnostic tests for better patient outcomes.
+            </p>
+          </div>
+          <div
+            class="partner-card"
+            style="
+              background-image: url('https://www.passezlinfo.fr/wp-content/uploads/2018/12/Comment-ouvrir-sa-pharmacie.jpg');
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <p class="partner-label">PARTNER</p>
+            <p class="partner-role">Pharmacies</p>
+            <p class="partner-description">
+              Collaborating with pharmacies to ensure our patients have easy
+              access to prescribed medications and health products.
+            </p>
+          </div>
+          <div
+            class="partner-card"
+            style="
+              background-image: url('https://cdns3.fitfit.fitness/us/media/items/540x280/28792-Spectrum-Health-Pennock-Health-Wellness-Center-nb2ru.jpg');
+              background-size: cover;
+              background-position: center;
+            "
+          >
+            <p class="partner-label">PARTNER</p>
+            <p class="partner-role">Wellness Centers</p>
+            <p class="partner-description">
+              Partnering with wellness centers to promote preventive care and
+              healthy lifestyles in our communities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-container">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <p>
+          We are dedicated to providing comprehensive health management
+          solutions. If you have any questions, suggestions, or partnership
+          inquiries, please reach out to us. We look forward to hearing from
+          you!
+        </p>
+
+        <div class="contact-info">
+          <div><i class="fas fa-envelope"></i> Email: akhilsai@gmail.com</div>
+          <div><i class="fas fa-phone"></i> Phone: +91 9118117116</div>
+          <div>
+            <i class="fas fa-map-marker-alt"></i> Address: 2-70/A main road
+            amalapuram, Wellness City, USA
+          </div>
+        </div>
+
+        <div class="message">
+          <p>If you need assistance, don't hesitate to contact us!</p>
+        </div>
+
+        <div class="social-media">
+          <a href="www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+          <a href="www.twitter.com"><i class="fab fa-twitter"></i></a>
+          <a href="www.linkdin.com"><i class="fab fa-linkedin-in"></i></a>
+          <a href="www.instagram.com"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

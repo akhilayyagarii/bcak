@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Medical Homepage</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      header {
+        background-color: #111111;
+        padding: 20px 0;
+        color: rgb(252, 251, 251);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+
+
+      .login-btn-container {
+  margin-left: 20px;
+}
+
+.login-btn {
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  padding: 10px 20px; /* Padding */
+  font-size: 1.1rem; /* Font size */
+  border: none; /* Remove border */
+  border-radius: 50px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.login-btn:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+      }
+
+      nav ul li {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+
+      .hero {
+        background-image: url("../static/assets/images/12.jpg"); /* Replace with actual image */
+        background-size: cover;
+        background-position: center;
+        padding: 100px 60px;
+        position: relative;
+        display: flex; /* Enable Flexbox */
+        flex-direction: column; /* Stack items vertically */
+        justify-content: center; /* Center vertically */
+        align-items: center; /* Center horizontally */
+        height: 100vh; /* Full viewport height */
+      }
+
+      .hero-content {
+        text-align: center;
+        color: rgb(13, 13, 13);
+      }
+
+      .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+      }
+
+      .hero-content p {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+      }
+
+      .tagline {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        font-style: italic;
+      }
+
+      .form-container {
+        display: flex;
+        justify-content: center;
+        background: white;
+        padding: 20px; /* Reduced padding for a more compact look */
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        opacity: 0.9; /* Adjusted for better visibility */
+        width: 80%; /* Set a maximum width to keep it medium-sized */
+        max-width: 800px; /* Maximum width for larger screens */
+        margin-top: 20px; /* Space above the container */
+      }
+
+      .upload-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-basis: 100%; /* Allow it to take full width of the container */
+        padding: 20px; /* Maintain the padding */
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .upload-box h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .upload-box input[type="file"] {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #ffffff77;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Start button styling */
+      .btn {
+        background-color: #007bff; /* Blue background */
+        color: white; /* White text */
+        padding: 10px 20px; /* Padding around the text */
+        font-size: 1.2rem; /* Larger font size */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Rounded corners */
+        cursor: pointer; /* Pointer on hover */
+        transition: background-color 0.3s ease; /* Smooth transition for hover */
+        text-decoration: none; /* Remove underline */
+      }
+
+      .btn:hover {
+        background-color: #0056b3; /* Darker shade of blue on hover */
+      }
+
+      .features {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 50px;
+        flex-wrap: wrap;
+      }
+
+      .feature {
+        flex-basis: 30%;
+        padding: 20px;
+        background-color: #e9ecef;
+        border-radius: 5px;
+        margin: 10px;
+        text-align: center;
+      }
+
+      .footer {
+        background-color: #0a0a0a;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      /* New testimonials section */
+      .testimonials {
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      .testimonials p {
+        font-style: italic;
+        margin: 15px 0;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .form-container {
+          flex-direction: column;
+          align-items: center;
+          margin-top: 50px;
+        }
+
+        .features {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">MEDICAL</div>
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/patient records">Patient Records</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+          <div class="login-btn-container">
+      <a href="/" class="login-btn">Log out</a>
+    </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Caring for Life</h1>
+        <p>Leading the Way in Medical Excellence.</p>
+        <p class="tagline">Your health is our priority!</p>
+        <!-- Tagline added -->
+      </div>
+      <div class="form-container">
+        <div class="upload-box">
+          <h3>Upload Health Documents</h3>
+          <a
+            href="/records"
+            class="btn"
+            title="Click to upload health documents"
+            >Start</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <div class="features">
+      <div class="feature">
+        <h3>Secure Upload</h3>
+        <p>Your documents are safe with us.</p>
+      </div>
+      <div class="feature">
+        <h3>Easy Access</h3>
+        <p>Access your health records anytime, anywhere.</p>
+      </div>
+      <div class="feature">
+        <h3>Expert Support</h3>
+        <p>Get assistance from our dedicated team.</p>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <h2>What Our Users Say</h2>
+      <p>"This platform has made managing my health records so easy!"</p>
+      <p>"I love the convenience of uploading my documents online."</p>
+    </div>
+
+    <footer class="footer">
+      <p>&copy; 2024 Medical. All Rights Reserved.</p>
+    </footer>
+     
+  </body>
+</html>

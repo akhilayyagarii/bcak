@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consult Page</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f3f4f6;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        background-color: #444;
+        color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+      }
+
+      .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        overflow: hidden;
+        transition: transform 0.3s;
+      }
+
+      .card:hover {
+        transform: translateY(-10px);
+      }
+
+      .card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .card-content {
+        padding: 20px;
+      }
+
+      .card-content h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card-content p {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 10px;
+      }
+
+      .card button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .card button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Consult Specialists for Different Body Parts</h1>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="../static/assets/images/eye.avif" alt="Eye" />
+        <div class="card-content">
+          <h2>Eye</h2>
+          <p>Dr. V J Ramakumar, Sr. General Ophthalmologist</p>
+          <p>Maxivision Super Specialty Eye Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/ear.jpg" alt="Ear, Nose" />
+        <div class="card-content">
+          <h2>Ear, Nose</h2>
+          <p>Dr. Pradeep Kumar P, Otorhinolaryngologist</p>
+          <p>Apollo Healthcity Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/teeth.avif" alt="Dental" />
+        <div class="card-content">
+          <h2>Dental</h2>
+          <p>Dr. Sri Satya, General Dentistry</p>
+          <p>Sri Satya Dental Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/th.avif" alt="Thyroid" />
+        <div class="card-content">
+          <h2>Thyroid</h2>
+          <p>Dr. K.A.V. Subrahmanyam, Endocrinologist</p>
+          <p>Dr. K.A.V. Subrahmanyam Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/heart.avif" alt="Heart" />
+        <div class="card-content">
+          <h2>Heart</h2>
+          <p>Dr. A.K. Bardhan</p>
+          <p>Apollo Hospitals</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/lungs.avif" alt="Lungs" />
+        <div class="card-content">
+          <h2>Lungs</h2>
+          <p>Dr. A. Premkumar, MBBS, MD</p>
+          <p>Dr. A. Premkumar Hospitals</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/u.avif" alt="Urinary System" />
+        <div class="card-content">
+          <h2>Urinary System</h2>
+          <p>Dr. M. Prasada Rao, Urologist</p>
+          <p>Dr. M. Prasada Rao Hospitals</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/i.avif" alt="Intestines" />
+        <div class="card-content">
+          <h2>Intestines</h2>
+          <p>Dr. Biswabasu Das</p>
+          <p>Seven Hills Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/b.avif" alt="Brain" />
+        <div clas="card-content">
+          <h2>Brain</h2>
+          <p>Dr. Anuradha Nidra, Neurologist</p>
+          <p>Anuradha Neuro Center</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="../static/assets/images/s.avif" alt="Bones" />
+        <div class="card-content">
+          <h2>Bones</h2>
+          <p>Dr. I. Satish Raju, Robotic Joint Replacement Surgeon</p>
+          <p>Apollo Hospitals & Adharsha Orthopaedic Centre</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <!-- New Skin Card -->
+      <div class="card">
+        <img src="../static/assets/images/sk.avif" alt="Skin" />
+        <div class="card-content">
+          <h2>Skin</h2>
+          <p>Dr. Ramesh K, Dermatologist</p>
+          <p>Skin Care Hospital</p>
+          <button>Consult</button>
+        </div>
+      </div>
+
+      <!-- New Kidney Card -->
+      <div class="card">
+        <img src="../static/assets/images/kidney.avif" alt="Kidney" />
+        <div class="card-content">
+          <h2>Kidney</h2>
+          <p>Dr. P. S. Murthy, Nephrologist</p>
+          <p>Apollo Kidney Care</p>
+          <button>Consult</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

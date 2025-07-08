@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #ffe1d5;
+        background-image: url("../static/assets/images/team.jpg");
+        background-size: cover;
+        background-position: center 20%;
+        background-repeat: no-repeat;
+        color: #333;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column; /* Changed to column to include header */
+      }
+      header {
+        background-color: #111111;
+        padding: 20px 0;
+        color: rgb(252, 251, 251);
+      }
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+      nav ul {
+        list-style-type: none;
+        display: flex;
+      }
+      nav ul li {
+        display: inline;
+        margin-left: 20px;
+      }
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+      .container {
+        flex: 1; /* Take remaining space */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .main {
+        text-align: center;
+      }
+      .main h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .main .message-input {
+        width: 600px;
+        padding: 15px;
+        font-size: 1.2rem;
+        border: 1px solid #ccc;
+        border-radius: 50px;
+        outline: none;
+      }
+      .main .message-input:focus {
+        border-color: #888;
+      }
+      .main .options {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+      }
+      .main .options button {
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        background-color: #eaeaea;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: background-color 0.3s;
+      }
+      .main .options button:hover {
+        background-color: #ddd;
+      }
+      /* Footer styling */
+      .footer {
+        background-color: #0a0a0a;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        margin-top: auto; /* Push footer to the bottom */
+      }
+      .footer p {
+        margin: 5px 0;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">ADMIN DASHBOARD</div>
+        <nav>
+          <ul>
+            <li><a href="homepage1.html">Home</a></li>
+            <li><a href="#">Terms and Conditions</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="/admincard">pacient recods</a></li>
+            <!-- Placeholder for login user link -->
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
+      <div class="main">
+        <h1>What do you want to concern today?</h1>
+        <label for="health-issues" style="display: none">Health Issues</label>
+        <input
+          list="health-issues-list"
+          id="health-issues"
+          name="health-issues"
+          class="message-input"
+          placeholder="search health issues..."
+        />
+        <datalist id="health-issues-list">
+          <option value="Diabetes"></option>
+          <option value="Hypertension"></option>
+          <option value="Asthma"></option>
+          <option value="Heart Disease"></option>
+          <option value="Arthritis"></option>
+          <option value="Cancer"></option>
+          <option value="Allergies"></option>
+          <option value="A+"></option>
+          <option value="A-"></option>
+          <option value="B+"></option>
+          <option value="B-"></option>
+          <option value="O+"></option>
+          <option value="O-"></option>
+          <option value="AB+"></option>
+          <option value="AB-"></option>
+        </datalist>
+        <div class="options">
+          <button type="button">Submit</button>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <p>&copy; 2024 Medical. All Rights Reserved.</p>
+      <p>
+        Admin Dashboard Overview: This admin dashboard allows you to monitor and
+        manage different aspects of the platform. Here, you can check and update
+        information, address patient concerns, and handle other administrative
+        tasks.
+      </p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HealthManager</title>
+    <style>
+      /* Base Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        background-image: url("../static/assets/images/services.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+      }
+
+      /* Navbar Styles */
+      header {
+        background-color: #050505;
+        padding: 20px 0;
+        color: white;
+        opacity: 0.9;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 50px;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: bold;
+      }
+
+      nav ul {
+        list-style-type: none;
+        display: flex;
+      }
+
+      nav ul li {
+        display: inline;
+        margin-left: 20px;
+      }
+
+      nav ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+      }
+
+      /* Dropdown Styling */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      .dropdown-btn {
+        background-color: #f1f1f1;
+        border: none;
+        color: black;
+        padding: 10px 16px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        width: 200px;
+      }
+
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
+      }
+
+      .navbar-right {
+        display: flex;
+        align-items: center;
+      }
+
+      /* General Section Animation */
+      section {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s forwards;
+        margin-bottom: 40px;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 8px;
+        max-width: 800px;
+        margin: 20px auto;
+      }
+
+      /* Container for the service boxes */
+      .service-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* Service Box Animation */
+      .service-box {
+        opacity: 0;
+        transform: translateY(50px);
+        animation: slideUp 1s forwards;
+        background-color: rgba(255, 255, 255, 0.2);
+        padding: 20px;
+        margin: 10px;
+        border-radius: 8px;
+        text-align: center;
+        width: 250px;
+        color: white;
+      }
+
+      .service-box:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+
+      .service-box:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+
+      .service-box:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+
+      .service-box:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Testimonials */
+      blockquote {
+        font-size: 18px;
+        font-style: italic;
+        color: #ddd;
+        text-align: center;
+        margin: 20px auto;
+      }
+
+      cite {
+        display: block;
+        text-align: center;
+        color: #bbb;
+        font-size: 14px;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 20px;
+        color: #fff;
+      }
+
+      h2 {
+        font-size: 24px;
+        color: #fff;
+        text-align: center;
+      }
+
+      p {
+        font-size: 16px;
+        color: #eee;
+        text-align: center;
+        margin: 10px auto;
+        max-width: 600px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #00aaff;
+        font-size: 18px;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .navbar ul {
+          flex-direction: column;
+        }
+
+        .service-box {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+
+        section {
+          max-width: 90%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .navbar ul {
+          flex-direction: column;
+          padding-left: 0;
+        }
+
+        nav ul li {
+          margin-left: 0;
+          margin-bottom: 10px;
+        }
+
+        .service-box {
+          width: 100%;
+        }
+
+        h2 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <div class="navbar">
+        <div class="logo">MEDICAL</div>
+        <nav>
+          <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/patient records">Patient Records</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </nav>
+        <!-- Username and Dropdown on the right side -->
+      </div>
+    </header>
+
+    <section id="services">
+      <h2>Our Services</h2>
+      <div class="service-container">
+        <div class="service-box">
+          <h3><a href="/university">Medical university </a></h3>
+          <p>Keep all your medical university in one place.</p>
+        </div>
+        <div class="service-box">
+          <h3><a href="/con">Consultation</a></h3>
+          <p>Get in touch with medical professionals for advice.</p>
+        </div>
+        <div class="service-box">
+          <h3><a href="/fitness">Fitness Tracking</a></h3>
+          <p>track your fitness.</p>
+        </div>
+
+        <!-- New calories management Box -->
+        <div class="service-box">
+          <h3><a href="/weg">Weight management</a></h3>
+          <p>Know your calories.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <h2>What Our Users Say</h2>
+      <blockquote>
+        "This system helped me track my health progress and stay in shape!"
+      </blockquote>
+      <cite>Health Management Data System</cite>
+    </section>
+
+    <footer>
+      <p>© 2024 HealthManager. All Rights Reserved.</p>
+    </footer>
+     
+  </body>
+</html>

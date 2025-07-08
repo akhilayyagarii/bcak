@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start Page</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        background: url("../static/assets/images/start.jpg")
+          no-repeat center center fixed;
+        background-size: cover;
+        animation: backgroundMove 5s linear infinite;
+      }
+
+      /* Super Fast Background Animation */
+      @keyframes backgroundMove {
+        0% {
+          background-position: center;
+        }
+        25% {
+          background-position: top right;
+        }
+        50% {
+          background-position: bottom left;
+        }
+        75% {
+          background-position: top left;
+        }
+        100% {
+          background-position: center;
+        }
+      }
+
+      .container {
+        text-align: center;
+        background-color: rgba(255, 255, 255, 0.6); /* 50% transparency */
+        padding: 50px;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(14, 2, 2, 0.1);
+        z-index: 1;
+      }
+
+      h1,
+      p {
+        color: #000; /* Black color */
+        font-weight: bold;
+      }
+
+      .back-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 20px;
+      }
+
+      .back-btn:hover {
+        background-color: #218838;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>START YOUR HEALTH JOURNEY!</h1>
+      <p>Explore more about health tips and checkup data.</p>
+      <a href="/home" class="back-btn">Go to home</a>
+    </div>
+  </body>
+</html>

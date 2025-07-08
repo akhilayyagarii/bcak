@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weight Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background-image: url("../static/assets/images/weg.jpg");
+        background-size: cover; /* Ensures the image covers the entire viewport */
+        background-position: center; /* Keeps the image centered */
+        background-repeat: no-repeat; /* Prevents image repetition */
+        min-height: 100vh; /* Ensures the body covers at least the full height of the viewport */
+        color: white;
+      }
+
+      a {
+        display: inline-block;
+        margin: 20px;
+        padding: 15px 30px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+      a:hover {
+        background-color: #0056b3;
+      }
+
+      h1,
+      p {
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.6
+        ); /* Adds some contrast for text readability */
+        display: inline-block;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      hr {
+        border: 1px solid white; /* Creates a white horizontal line */
+        margin: 20px auto; /* Centers the line */
+        width: 50%; /* Sets the width of the line */
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Weight Management</h1>
+    <hr />
+    <!-- Horizontal line added here -->
+    <p>Select a page to learn about weight gain or weight loss.</p>
+    <div>
+      <a href="/gain">Weight Gain</a>
+      <a href="/loss">Weight Loss</a>
+    </div>
+  </body>
+</html>

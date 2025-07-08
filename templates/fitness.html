@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fitness Tracker with History</title>
+    <style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('../static/assets/images/fit.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: #333;
+  height: 100vh; /* Ensure the body takes full view height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  max-width: 600px;
+  padding: 30px 35px; /* Reduced padding for a tighter layout */
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .output,
+      .history {
+        margin-top: 20px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+
+      th {
+        background-color: #28a745;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Fitness Tracker</h2>
+      <form id="fitnessForm">
+        <label for="weight">Weight (kg):</label>
+        <input
+          type="number"
+          id="weight"
+          placeholder="Enter your weight"
+          required
+        />
+
+        <label for="systolicBP">Systolic Blood Pressure (mmHg):</label>
+        <input
+          type="number"
+          id="systolicBP"
+          placeholder="Enter systolic BP"
+          required
+        />
+
+        <label for="diastolicBP">Diastolic Blood Pressure (mmHg):</label>
+        <input
+          type="number"
+          id="diastolicBP"
+          placeholder="Enter diastolic BP"
+          required
+        />
+
+        <button type="button" onclick="trackData()">Track Data</button>
+        <button type="button" onclick="clearHistory()">Clear History</button>
+      </form>
+
+      <div class="output" id="output"></div>
+
+      <div class="history" id="history">
+        <h3>Tracking History</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Weight (kg)</th>
+              <th>Blood Pressure (mmHg)</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <!-- History will be displayed here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // Function to track data
+      function trackData() {
+        console.log("trackData function called"); // Debugging log
+
+        const weight = document.getElementById("weight").value;
+        const systolicBP = document.getElementById("systolicBP").value;
+        const diastolicBP = document.getElementById("diastolicBP").value;
+
+        if (weight && systolicBP && diastolicBP) {
+          const entry = {
+            date: new Date().toLocaleString(),
+            weight: weight,
+            systolicBP: systolicBP,
+            diastolicBP: diastolicBP,
+          };
+
+          // Save to localStorage
+          let history =
+            JSON.parse(localStorage.getItem("fitnessHistory")) || [];
+          history.push(entry);
+          localStorage.setItem("fitnessHistory", JSON.stringify(history));
+
+          console.log("Data saved:", entry); // Debugging log
+
+          displayLatest(entry);
+          displayHistory();
+        } else {
+          document.getElementById("output").innerHTML =
+            "<p>Please fill out all the fields.</p>";
+        }
+      }
+
+      // Function to display latest entry
+      function displayLatest(entry) {
+        document.getElementById("output").innerHTML = `
+                <h3>Tracked Data</h3>
+                <p><strong>Date:</strong> ${entry.date}</p>
+                <p><strong>Weight:</strong> ${entry.weight} kg</p>
+                <p><strong>Blood Pressure:</strong> ${entry.systolicBP}/${entry.diastolicBP} mmHg</p>
+            `;
+      }
+
+      // Function to display history
+      function displayHistory() {
+        console.log("Displaying history"); // Debugging log
+        let history = JSON.parse(localStorage.getItem("fitnessHistory")) || [];
+        let historyTableBody = document.getElementById("historyTableBody");
+        historyTableBody.innerHTML = "";
+
+        history.forEach((entry) => {
+          historyTableBody.innerHTML += `
+                    <tr>
+                        <td>${entry.date}</td>
+                        <td>${entry.weight} kg</td>
+                        <td>${entry.systolicBP}/${entry.diastolicBP} mmHg</td>
+                    </tr>
+                `;
+        });
+
+        console.log("History displayed:", history); // Debugging log
+      }
+
+      // Function to clear history
+      function clearHistory() {
+        localStorage.removeItem("fitnessHistory");
+        document.getElementById("historyTableBody").innerHTML = "";
+        console.log("History cleared"); // Debugging log
+      }
+
+      // Load history when the page loads
+      window.onload = function () {
+        console.log("Page loaded"); // Debugging log
+        displayHistory();
+      };
+    </script>
+  </body>
+</html>

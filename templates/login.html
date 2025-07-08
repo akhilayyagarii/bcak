@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f8f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        max-width: 1200px;
+        padding: 40px;
+        background-color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+      .login-box {
+        width: 50%;
+      }
+      h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+      p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: #666;
+        line-height: 1.6;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 15px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .signup {
+        margin-left: auto;
+        text-decoration: none;
+        color: #3b30ca;
+      }
+
+      .signup:hover {
+        text-decoration: underline;
+      }
+
+      .options a:first-child {
+        text-decoration: none;
+        color: #3b30ca;
+      }
+
+      .options a:first-child:hover {
+        text-decoration: underline;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #f44b60;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      button:hover {
+        background-color: #c4374c;
+      }
+
+      .illustration {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50%;
+      }
+
+      .illustration img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="login-box">
+        <h2>Welcome Back</h2>
+        <p>Login to your account</p>
+        <form action="/loginuser" method="post">
+          <input
+            type="text"
+            placeholder="Login with email or phone"
+            name="email"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <div class="options">
+            <a href="/forgot">Forgot password?</a>
+            <a href="/signup" class="signup">Signup</a>
+          </div>
+          <button type="submit">Login</button>
+        </form>
+        <div><p>{{status}}</p></div>
+      </div>
+      <div class="illustration">
+        <img src="../static/assets/images/1234556.jpg" alt="illustration" />
+      </div>
+    </div>
+  </body>
+</html>
