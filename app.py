@@ -9,7 +9,9 @@ patients=db['patients']
 records=db["records"]
 admin=db['admin']
 
+from flask import Flask;
 app = Flask(__name__)
+
 app.secret_key="akhil"
 
 @app.route("/")
@@ -230,4 +232,4 @@ def admincard():
 
 if __name__ == "__main__":
   app.run(port=3600,debug=True)
-  app.run(port=4666,debug=True)
+
