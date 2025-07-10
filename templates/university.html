@@ -1,392 +1,885 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Top 10 Medical Colleges in the World and India</title>
     <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        background-image: url("https://static.vecteezy.com/system/resources/previews/000/543/740/original/medical-abstract-background-polygon-and-dot-line-graphic-design-element-blue-and-white-tone-for-modern-science-futuristic-wallpaper-cover-concept-digital-network-of-health-care-template-theme-vector.jpg");
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 20px;
-        color: #333;
-        animation: fadeInBackground 1.5s ease-in-out;
-      }
-
-      @keyframes fadeInBackground {
-        0% {
-          opacity: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        100% {
-          opacity: 1;
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --medical-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #2d3748;
+            --text-secondary: #4a5568;
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.2);
         }
-      }
 
-      h1 {
-        text-align: center;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.6);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        font-size: 2rem;
-        margin-bottom: 40px;
-      }
-
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-      }
-
-      .college {
-        background-color: rgba(255, 255, 255, 0.85);
-        border-radius: 12px;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        overflow: hidden;
-        padding: 20px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        opacity: 0;
-        animation: fadeInCard 1s ease-in-out forwards;
-      }
-
-      .college:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-      }
-
-      @keyframes fadeInCard {
-        0% {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      h2 {
-        font-size: 1.5rem;
-        color: #333;
-        margin-top: 0;
-        margin-bottom: 10px;
-        font-weight: 600;
-      }
-
-      p {
-        font-size: 0.95rem;
-        color: #555;
-        line-height: 1.6;
-      }
-
-      img {
-        width: 100%;
-        border-radius: 8px;
-        margin-bottom: 15px;
-      }
-
-      /* Media query for mobile devices */
-      @media (max-width: 768px) {
         body {
-          padding: 10px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--medical-gradient);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        h1 {
-          font-size: 1.8rem;
+        /* Animated Background Elements */
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
         }
 
+        .bg-decoration::before,
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .bg-decoration::before {
+            width: 400px;
+            height: 400px;
+            top: -200px;
+            right: -200px;
+            animation-delay: -4s;
+        }
+
+        .bg-decoration::after {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        /* Medical pattern overlay */
+        .medical-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--medical-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loaded .loading-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .back-home {
+            padding: 0.75rem 1.5rem;
+            background: var(--accent-gradient);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .back-home:hover::before {
+            left: 100%;
+        }
+
+        .back-home:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 4rem 0 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        /* Cards Container */
         .container {
-          grid-template-columns: 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
         }
 
+        /* College Cards */
         .college {
-          padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: fadeInUp 1s ease-out both;
         }
 
-        h2 {
-          font-size: 1.4rem;
+        .college:nth-child(even) {
+            animation-delay: 0.1s;
         }
 
-        p {
-          font-size: 0.9rem;
+        .college:nth-child(3n) {
+            animation-delay: 0.2s;
         }
-      }
+
+        .college::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.6s ease;
+        }
+
+        .college:hover::before {
+            transform: scale(1);
+        }
+
+        .college:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .college-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .college-logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            background: white;
+            padding: 10px;
+        }
+
+        .college:hover .college-logo {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .college-info {
+            flex: 1;
+        }
+
+        .college-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .college-location {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .college-location::before {
+            content: '📍';
+            font-size: 0.9rem;
+        }
+
+        .college-description {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+            }
+            
+            .back-home {
+                padding: 0.625rem 1.25rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding: 6rem 1rem 3rem;
+            }
+            
+            .container {
+                grid-template-columns: 1fr;
+                padding: 0 1rem 3rem;
+                gap: 1.5rem;
+            }
+            
+            .college {
+                padding: 1.5rem;
+            }
+            
+            .college-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .college-logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .college-name {
+                font-size: 1.2rem;
+            }
+            
+            .section-header {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .logo {
+                font-size: 1.25rem;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .college {
+                padding: 1.25rem;
+            }
+            
+            .college-name {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Focus States for Accessibility */
+        .back-home:focus,
+        .college:focus {
+            outline: 2px solid rgba(255, 255, 255, 0.5);
+            outline-offset: 2px;
+        }
+
+        /* Print Styles */
+        @media print {
+            .navbar,
+            .scroll-to-top,
+            .loading-overlay {
+                display: none;
+            }
+            
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .college {
+                background: white;
+                border: 1px solid #ccc;
+                margin-bottom: 2rem;
+                page-break-inside: avoid;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <h1>Top 10 Medical Colleges in the World</h1>
-
-    <div class="container">
-      <!-- 1. Harvard Medical School -->
-      <div class="college">
-        <h2>Harvard Medical School, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Harvard_Medical_School_shield.svg/1200px-Harvard_Medical_School_shield.svg.png"
-          alt="Harvard Medical School"
-        />
-        <p>Location: Boston, Massachusetts, USA</p>
-        <p>
-          Harvard Medical School is the top-ranked medical institution globally, known for its pioneering research and comprehensive curriculum. It has contributed to numerous medical breakthroughs and trains students in diverse specialties, from clinical practice to biomedical research.
-        </p>
-      </div>
-
-      <!-- Add other medical schools as needed... -->
-        <div class="college">
-        <h2>Johns Hopkins School of Medicine, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Johns_Hopkins_Medicine_logo.svg"
-          alt="Johns Hopkins School of Medicine"
-        />
-        <p>Location: Baltimore, Maryland, USA</p>
-        <p>
-          Renowned for its excellence in both medical education and clinical practice, Johns Hopkins School of Medicine has been a leader in medical discoveries and teaching. It is also closely associated with the world-famous Johns Hopkins Hospital.
-        </p>
-      </div>
-
-      <!-- 3. Stanford University School of Medicine -->
-      <div class="college">
-        <h2>Stanford University School of Medicine, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/b/b7/Stanford_University_seal_2003.svg"
-          alt="Stanford University School of Medicine"
-        />
-        <p>Location: Stanford, California, USA</p>
-        <p>
-          Known for its strong emphasis on research, Stanford University School of Medicine offers a robust curriculum with world-class faculty and cutting-edge research facilities. It is recognized for its advances in fields like genomics, immunology, and neuroscience.
-        </p>
-      </div>
-
-      <!-- 4. University of Cambridge School of Clinical Medicine -->
-      <div class="college">
-        <h2>University of Cambridge, UK</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/University_of_Cambridge_coat_of_arms.svg/1200px-University_of_Cambridge_coat_of_arms.svg.png"
-          alt="University of Cambridge"
-        />
-        <p>Location: Cambridge, England, UK</p>
-        <p>
-          The University of Cambridge's School of Clinical Medicine is a prestigious institution where medical education and research excellence meet. Its contributions in genetics, infectious diseases, and cancer research are recognized worldwide.
-        </p>
-      </div>
-
-      <!-- 5. University of Oxford Medical Sciences Division -->
-      <div class="college">
-        <h2>University of Oxford, UK</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Oxford-University-Circlet.svg/1024px-Oxford-University-Circlet.svg.png"
-          alt="University of Oxford"
-        />
-        <p>Location: Oxford, England, UK</p>
-        <p>
-          Oxford’s Medical Sciences Division is one of the world’s leading medical research centers. Its students benefit from state-of-the-art research facilities and training in clinical and scientific fields, contributing to global advancements in medicine.
-        </p>
-      </div>
-
-      <!-- 6. Karolinska Institute -->
-      <div class="college">
-        <h2>Karolinska Institute, Sweden</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/8/83/Karolinska_Institutet_Seal.svg"
-          alt="Karolinska Institute"
-        />
-        <p>Location: Solna, Stockholm, Sweden</p>
-        <p>
-          Home to the Nobel Assembly, which awards the Nobel Prize in Physiology or Medicine, Karolinska Institute is an internationally recognized leader in medical research and education. It specializes in molecular medicine, cancer biology, and public health.
-        </p>
-      </div>
-
-      <!-- 7. Mayo Clinic Alix School of Medicine -->
-      <div class="college">
-        <h2>Mayo Clinic Alix School of Medicine, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mayo_Clinic_logo.svg"
-          alt="Mayo Clinic Alix School of Medicine"
-        />
-        <p>Location: Rochester, Minnesota, USA</p>
-        <p>
-          Affiliated with the world-renowned Mayo Clinic, this medical school provides top-tier education with a focus on patient-centered care and clinical innovation. It ranks high in fields such as cardiovascular diseases and oncology.
-        </p>
-      </div>
-
-      <!-- 8. University of California, San Francisco (UCSF) School of Medicine -->
-      <div class="college">
-        <h2>UCSF School of Medicine, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/e/ee/University_of_California%2C_San_Francisco_logo.svg"
-          alt="UCSF School of Medicine"
-        />
-        <p>Location: San Francisco, California, USA</p>
-        <p>
-          UCSF School of Medicine is known for its contributions to medical research, especially in immunology, cancer, and neuroscience. The school prioritizes research and clinical education, making it one of the top institutions in the medical field.
-        </p>
-      </div>
-
-      <!-- 9. Yale School of Medicine -->
-      <div class="college">
-        <h2>Yale School of Medicine, USA</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/7/75/Yale_University_Shield_1.svg"
-          alt="Yale School of Medicine"
-        />
-        <p>Location: New Haven, Connecticut, USA</p>
-        <p>
-          Yale School of Medicine is a leading institution known for its innovative medical education and groundbreaking research. It offers a collaborative environment and is recognized for advancements in internal medicine, public health, and surgery.
-        </p>
-      </div>
-
-      <!-- 10. University of Toronto Faculty of Medicine -->
-      <div class="college">
-        <h2>University of Toronto Faculty of Medicine, Canada</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png"
-          alt="University of Toronto"
-        />
-        <p>Location: Toronto, Ontario, Canada</p>
-        <p>
-          The University of Toronto Faculty of Medicine is one of the top medical schools in North America. It has made significant contributions in the fields of stem cell research, cardiology, and transplantation. The school is also known for its diverse and inclusive approach to medical education.
-        </p>
-      </div>
+</head>
+<body>
+    <div class="loading-overlay">
+        <div class="loading-spinner"></div>
     </div>
 
-    <h1>Top 10 Medical Colleges in India</h1>
+    <div class="bg-decoration"></div>
+    <div class="medical-pattern"></div>
 
-    <div class="container">
-      <!-- 1. All India Institute of Medical Sciences (AIIMS) -->
-      <div class="college">
-        <h2>All India Institute of Medical Sciences (AIIMS), New Delhi</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Aiimsseal.png/220px-Aiimsseal.png"
-          alt="AIIMS New Delhi"
-        />
-        <p>Location: New Delhi, India</p>
-        <p>
-          AIIMS New Delhi is the most prestigious medical institution in India. Known for its cutting-edge medical education and research, it has consistently ranked as the top medical school in the country.
-        </p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">🏥</div>
+                <span>MedEdu Global</span>
+            </a>
+            <a href="/services" class="back-home">
+                <span>🏠</span>
+                <span>Back to Home</span>
+            </a>
+        </div>
+    </nav>
 
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">World's Premier Medical Institutions</h1>
+                <p class="hero-subtitle">
+                    Discover the top medical colleges globally and in India, renowned for excellence in education, research, and healthcare innovation.
+                </p>
+            </div>
+        </section>
+
+        <section class="section-header">
+            <h2 class="section-title">🌍 Top 10 Medical Colleges Worldwide</h2>
+            <p class="section-subtitle">Leading institutions shaping the future of global healthcare</p>
+        </section>
+
+        <div class="container">
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Harvard_Medical_School_shield.svg/1200px-Harvard_Medical_School_shield.svg.png" alt="Harvard Medical School" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Harvard Medical School</h3>
+                        <p class="college-location">Boston, Massachusetts, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Harvard Medical School is the top-ranked medical institution globally, known for its pioneering research and comprehensive curriculum. It has contributed to numerous medical breakthroughs and trains students in diverse specialties, from clinical practice to biomedical research.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Johns_Hopkins_Medicine_logo.svg" alt="Johns Hopkins School of Medicine" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Johns Hopkins School of Medicine</h3>
+                        <p class="college-location">Baltimore, Maryland, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Renowned for its excellence in both medical education and clinical practice, Johns Hopkins School of Medicine has been a leader in medical discoveries and teaching. It is also closely associated with the world-famous Johns Hopkins Hospital.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/b/b7/Stanford_University_seal_2003.svg" alt="Stanford University School of Medicine" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Stanford University School of Medicine</h3>
+                        <p class="college-location">Stanford, California, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Known for its strong emphasis on research, Stanford University School of Medicine offers a robust curriculum with world-class faculty and cutting-edge research facilities. It is recognized for its advances in fields like genomics, immunology, and neuroscience.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/University_of_Cambridge_coat_of_arms.svg/1200px-University_of_Cambridge_coat_of_arms.svg.png" alt="University of Cambridge" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">University of Cambridge</h3>
+                        <p class="college-location">Cambridge, England, UK</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    The University of Cambridge's School of Clinical Medicine is a prestigious institution where medical education and research excellence meet. Its contributions in genetics, infectious diseases, and cancer research are recognized worldwide.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Oxford-University-Circlet.svg/1024px-Oxford-University-Circlet.svg.png" alt="University of Oxford" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">University of Oxford</h3>
+                        <p class="college-location">Oxford, England, UK</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Oxford's Medical Sciences Division is one of the world's leading medical research centers. Its students benefit from state-of-the-art research facilities and training in clinical and scientific fields, contributing to global advancements in medicine.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/8/83/Karolinska_Institutet_Seal.svg" alt="Karolinska Institute" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Karolinska Institute</h3>
+                        <p class="college-location">Solna, Stockholm, Sweden</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Home to the Nobel Assembly, which awards the Nobel Prize in Physiology or Medicine, Karolinska Institute is an internationally recognized leader in medical research and education. It specializes in molecular medicine, cancer biology, and public health.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Mayo_Clinic_logo.svg" alt="Mayo Clinic Alix School of Medicine" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Mayo Clinic Alix School of Medicine</h3>
+                        <p class="college-location">Rochester, Minnesota, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Affiliated with the world-renowned Mayo Clinic, this medical school provides top-tier education with a focus on patient-centered care and clinical innovation. It ranks high in fields such as cardiovascular diseases and oncology.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ee/University_of_California%2C_San_Francisco_logo.svg" alt="UCSF School of Medicine" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">UCSF School of Medicine</h3>
+                        <p class="college-location">San Francisco, California, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    UCSF School of Medicine is known for its contributions to medical research, especially in immunology, cancer, and neuroscience. The school prioritizes research and clinical education, making it one of the top institutions in the medical field.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Yale_University_Shield_1.svg" alt="Yale School of Medicine" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Yale School of Medicine</h3>
+                        <p class="college-location">New Haven, Connecticut, USA</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    Yale School of Medicine is a leading institution known for its innovative medical education and groundbreaking research. It offers a collaborative environment and is recognized for advancements in internal medicine, public health, and surgery.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/University_of_Toronto_coat_of_arms.svg/1200px-University_of_Toronto_coat_of_arms.svg.png" alt="University of Toronto" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">University of Toronto Faculty of Medicine</h3>
+                        <p class="college-location">Toronto, Ontario, Canada</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    The University of Toronto Faculty of Medicine is one of the top medical schools in North America. It has made significant contributions in the fields of stem cell research, cardiology, and transplantation. The school is also known for its diverse and inclusive approach to medical education.
+                </p>
+            </div>
+        </div>
+
+        <section class="section-header">
+            <h2 class="section-title">🇮🇳 Top 10 Medical Colleges in India</h2>
+            <p class="section-subtitle">Premier Indian institutions driving healthcare excellence</p>
+        </section>
+
+        <div class="container">
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Aiimsseal.png/220px-Aiimsseal.png" alt="AIIMS New Delhi" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">All India Institute of Medical Sciences (AIIMS)</h3>
+                        <p class="college-location">New Delhi, India</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    AIIMS New Delhi is the most prestigious medical institution in India. Known for its cutting-edge medical education and research, it has consistently ranked as the top medical school in the country.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/CMC_Vellore_Logo.png" alt="CMC Vellore" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Christian Medical College (CMC)</h3>
+                        <p class="college-location">Vellore, Tamil Nadu, India</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    CMC Vellore is a top-ranked private medical college known for its excellent patient care and pioneering medical education. It has also made significant contributions to medical research in India.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/AFMC_Logo.png" alt="AFMC Pune" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Armed Forces Medical College (AFMC)</h3>
+                        <p class="college-location">Pune, Maharashtra, India</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    AFMC is known for providing medical education to the Indian Armed Forces. It offers top-notch medical education and produces highly skilled professionals who serve in the military as well as civilian sectors.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/4/4e/Mamc.jpg" alt="MAMC New Delhi" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Maulana Azad Medical College (MAMC)</h3>
+                        <p class="college-location">New Delhi, India</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    MAMC is one of the top government medical institutions in India. It offers excellent academic facilities and is known for its high standards of medical education, training, and patient care.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/JIPMER_logo.png/220px-JIPMER_logo.png" alt="JIPMER Puducherry" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Jawaharlal Institute of Postgraduate Medical Education & Research (JIPMER)</h3>
+                        <p class="college-location">Puducherry, India</p>
+                    </div>
+                </div>
+                <p class="college-description">
+                    JIPMER is a premier medical institution directly under the Government of India. It offers excellent education, research, and health care facilities and is one of the few institutions in India that offer both undergraduate and postgraduate programs.
+                </p>
+            </div>
+
+            <div class="college">
+                <div class="college-header">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/KMC_Manipal_Logo.png" alt="KMC Manipal" class="college-logo">
+                    <div class="college-info">
+                        <h3 class="college-name">Kasturba Medical College (KMC)</h3>
+                        <p class="college-description">
+                          KMC Manipal is one of the oldest private medical colleges in India and is known for its excellent education, modern infrastructure, and global collaborations in the field of medicine.
+                      </p>
+                      </div>
+                      
+                    </div>
+                </div>
+
+<div class="college">
+  <div class="college-header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/4/47/SGPGI_Logo.png" alt="SGPGI Lucknow" class="college-logo">
+      <div class="college-info">
+          <h3 class="college-name">Sanjay Gandhi Postgraduate Institute of Medical Sciences (SGPGI)</h3>
+          <p class="college-location">Lucknow, Uttar Pradesh, India</p>
       </div>
+  </div>
+  <p class="college-description">
+      SGPGI is one of the most reputed postgraduate medical institutes in India, focusing on higher medical education, training, and advanced research. It is a leading center for patient care and innovation in clinical sciences.
+  </p>
+</div>
 
-      <!-- Add other medical schools as needed... -->
-       <div class="college">
-        <h2>Christian Medical College (CMC), Vellore</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/c/c7/CMC_Vellore_Logo.png"
-          alt="CMC Vellore"
-        />
-        <p>Location: Vellore, Tamil Nadu, India</p>
-        <p>
-          CMC Vellore is a top-ranked private medical college known for its excellent patient care and pioneering medical education. It has also made significant contributions to medical research in India.
-        </p>
+<div class="college">
+  <div class="college-header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/b/b7/AMU_Logo.png" alt="Aligarh Muslim University" class="college-logo">
+      <div class="college-info">
+          <h3 class="college-name">Jawaharlal Nehru Medical College, AMU</h3>
+          <p class="college-location">Aligarh, Uttar Pradesh, India</p>
       </div>
+  </div>
+  <p class="college-description">
+      A part of Aligarh Muslim University, JNMC is known for its consistent academic excellence and contribution to public health services in India. It provides quality education and medical training.
+  </p>
+</div>
 
-      <!-- 3. Armed Forces Medical College (AFMC) Pune -->
-      <div class="college">
-        <h2>Armed Forces Medical College (AFMC), Pune</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/e/e5/AFMC_Logo.png"
-          alt="AFMC Pune"
-        />
-        <p>Location: Pune, Maharashtra, India</p>
-        <p>
-          AFMC is known for providing medical education to the Indian Armed Forces. It offers top-notch medical education and produces highly skilled professionals who serve in the military as well as civilian sectors.
-        </p>
+<div class="college">
+  <div class="college-header">
+      <img src="https://upload.wikimedia.org/wikipedia/en/7/7e/King_George%27s_Medical_University_Logo.png" alt="KGMU" class="college-logo">
+      <div class="college-info">
+          <h3 class="college-name">King George's Medical University (KGMU)</h3>
+          <p class="college-location">Lucknow, Uttar Pradesh, India</p>
       </div>
+  </div>
+  <p class="college-description">
+      Established in 1911, KGMU is a pioneer in medical education and healthcare in northern India. It offers a wide range of undergraduate, postgraduate, and super-specialty courses.
+  </p>
+</div>
 
-      <!-- 4. Maulana Azad Medical College (MAMC) -->
-      <div class="college">
-        <h2>Maulana Azad Medical College (MAMC), New Delhi</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/4/4e/Mamc.jpg"
-          alt="MAMC New Delhi"
-        />
-        <p>Location: New Delhi, India</p>
-        <p>
-          MAMC is one of the top government medical institutions in India. It offers excellent academic facilities and is known for its high standards of medical education, training, and patient care.
-        </p>
+<div class="college">
+  <div class="college-header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/BHU_Logo.svg" alt="BHU IMS" class="college-logo">
+      <div class="college-info">
+          <h3 class="college-name">Institute of Medical Sciences, BHU</h3>
+          <p class="college-location">Varanasi, Uttar Pradesh, India</p>
       </div>
+  </div>
+  <p class="college-description">
+      Part of Banaras Hindu University, IMS-BHU is one of India's oldest and most respected medical institutes, known for its comprehensive medical programs and outstanding faculty.
+  </p>
+</div>
 
-      <!-- 5. Jawaharlal Institute of Postgraduate Medical Education & Research (JIPMER) -->
-      <div class="college">
-        <h2>Jawaharlal Institute of Postgraduate Medical Education & Research (JIPMER), Puducherry</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/JIPMER_logo.png/220px-JIPMER_logo.png"
-          alt="JIPMER Puducherry"
-        />
-        <p>Location: Puducherry, India</p>
-        <p>
-          JIPMER is a premier medical institution directly under the Government of India. It offers excellent education, research, and health care facilities and is one of the few institutions in India that offer both undergraduate and postgraduate programs.
-        </p>
-      </div>
+<!-- SCROLL TO TOP BUTTON -->
+<button class="scroll-to-top" id="scrollToTop">⬆️</button>
 
-      <!-- 6. Kasturba Medical College (KMC), Manipal -->
-      <div class="college">
-        <h2>Kasturba Medical College (KMC), Manipal</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/2/2d/KMC_Manipal_Logo.png"
-          alt="KMC Manipal"
-        />
-        <p>Location: Manipal, Karnataka, India</p>
-        <p>
-          KMC Manipal is one of the oldest and most renowned medical colleges in India. It offers world-class medical education and research facilities and attracts students from all over the world.
-        </p>
-      </div>
+<!-- SCRIPTS -->
+<script>
+  // Loader fade out on page load
+  window.addEventListener("load", function () {
+      document.body.classList.add("loaded");
+  });
 
-      <!-- 7. King George's Medical University (KGMU) -->
-      <div class="college">
-        <h2>King George's Medical University (KGMU), Lucknow</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d3/King_George%27s_Medical_University_seal.png/220px-King_George%27s_Medical_University_seal.png"
-          alt="KGMU Lucknow"
-        />
-        <p>Location: Lucknow, Uttar Pradesh, India</p>
-        <p>
-          KGMU is one of India's most respected medical institutions. It offers a wide range of medical courses and is known for its research contributions in various medical fields.
-        </p>
-      </div>
+  // Show scroll-to-top button when scrolled down
+  const scrollBtn = document.getElementById("scrollToTop");
+  window.addEventListener("scroll", () => {
+      if (window.scrollY > 200) {
+          scrollBtn.classList.add("visible");
+      } else {
+          scrollBtn.classList.remove("visible");
+      }
+  });
 
-      <!-- 8. Grant Medical College, Mumbai -->
-      <div class="college">
-        <h2>Grant Medical College, Mumbai</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Grant_Medical_College_Seal.png"
-          alt="Grant Medical College Mumbai"
-        />
-        <p>Location: Mumbai, Maharashtra, India</p>
-        <p>
-          Grant Medical College is one of the oldest medical colleges in India and offers excellent medical education and training. It is affiliated with the prestigious Sir JJ Group of Hospitals.
-        </p>
-      </div>
+  scrollBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
-      <!-- 9. St. John's Medical College -->
-      <div class="college">
-        <h2>St. John's Medical College, Bangalore</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/c/c6/St_John%27s_Medical_College_Logo.jpg"
-          alt="St. John's Medical College Bangalore"
-        />
-        <p>Location: Bangalore, Karnataka, India</p>
-        <p>
-          St. John's Medical College is a private medical college known for its excellence in education and patient care. It ranks among the top medical institutions in India.
-        </p>
-      </div>
+  // Navbar scroll behavior
+  const navbar = document.querySelector(".navbar");
+  window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) {
+          navbar.classList.add("scrolled");
+      } else {
+          navbar.classList.remove("scrolled");
+      }
+  });
+</script>
 
-      <!-- 10. Sri Ramachandra Institute of Higher Education and Research -->
-      <div class="college">
-        <h2>Sri Ramachandra Institute of Higher Education and Research, Chennai</h2>
-        <img
-          src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Sri_Ramachandra_Logo.png"
-          alt="Sri Ramachandra Institute Chennai"
-        />
-        <p>Location: Chennai, Tamil Nadu, India</p>
-        <p>
-          Sri Ramachandra Institute is a top private medical university in India, known for its high-quality education and healthcare facilities. It also has a strong focus on research in medical sciences.
-        </p>
-      </div>
-    </div>
-  </body>
+
+
+</body>
 </html>

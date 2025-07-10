@@ -124,21 +124,36 @@ def loginusers():
   return render_template("login.html",status="invalid credentials")
 
 #signup details data base    
-@app.route("/registeruser",methods=["post"])
+@app.route("/registeruser", methods=["POST"])
 def signinuser():
-  d=request.form.get("name")
-  e=request.form.get("email")
-  f=request.form.get("phone")
-  h=request.form.get("gender")
-  i=request.form.get("age")
-  j=request.form.get("address")
-  k=request.form.get("password")
-  
-  user=patients.find_one({"email":e })
-  if(user):
-    return render_template("signup123.html",status="email already exist")
-  patients.insert_one({"name":d,"email":e,"phone":f,"gender":h,"age":i,"address":j,"password":k})
-  return render_template("login.html")
+    d = request.form.get("name")
+    e = request.form.get("email")
+    f = request.form.get("phone")
+    h = request.form.get("gender")
+    i = request.form.get("age")
+    j = request.form.get("address")
+    k = request.form.get("password")
+
+    print(f"📥 Signup received: {d=}, {e=}, {f=}, {h=}, {i=}, {j=}, {k=}")
+
+    user = patients.find_one({"email": e})
+    if user:
+        print("⚠️ Email already exists")
+        return render_template("signup123.html", status="Email already exists")
+
+    patients.insert_one({
+        "name": d,
+        "email": e,
+        "phone": f,
+        "gender": h,
+        "age": i,
+        "address": j,
+        "password": k  # 🔐 (See note below about hashing)
+    })
+
+    print("✅ User successfully inserted into DB")
+    return render_template("login.html")
+
 
 #records data store
 @app.route("/records", methods=['POST'])

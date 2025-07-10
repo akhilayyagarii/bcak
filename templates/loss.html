@@ -3,60 +3,365 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weight Loss</title>
+    <title>Weight Loss Tips & Meal Plans</title>
     <style>
-      body {
-        font-family: Arial, sans-serif;
+      * {
         margin: 0;
-        padding: 20px;
-        background-image: url("https://looseweightez.com/wp-content/uploads/2020/08/19-Weight-Loss-Tips-That-Actually-Work-scaled.jpg");
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
+        color: #333;
+        background: linear-gradient(135deg, rgba(106, 90, 205, 0.8), rgba(72, 61, 139, 0.8)),
+                    url("https://looseweightez.com/wp-content/uploads/2020/08/19-Weight-Loss-Tips-That-Actually-Work-scaled.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        line-height: 1.8; /* Adds space between lines */
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
       }
 
       .container {
+        max-width: 800px;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        margin-top: 20px;
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        padding: 40px 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+        animation: shine 3s infinite;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        animation: slideInDown 1s ease-out;
+      }
+
+      .header .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        font-weight: 300;
+        animation: slideInUp 1s ease-out 0.3s both;
+      }
+
+      .content {
+        padding: 40px 30px;
+      }
+
+      .intro {
+        text-align: center;
+        margin-bottom: 40px;
+        animation: fadeIn 1s ease-out 0.5s both;
+      }
+
+      .intro p {
+        font-size: 1.1rem;
+        color: #666;
         max-width: 600px;
         margin: 0 auto;
-        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .section {
+        margin-bottom: 40px;
+        animation: slideInLeft 1s ease-out;
+      }
+
+      .section:nth-child(even) {
+        animation: slideInRight 1s ease-out;
+      }
+
+      .section h2 {
+        color: #4CAF50;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid #4CAF50;
+        position: relative;
+      }
+
+      .section h2::after {
+        content: '';
+        position: absolute;
+        bottom: -3px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, #4CAF50, #45a049);
+        border-radius: 2px;
+      }
+
+      .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .tip-card {
+        background: white;
         padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        animation: fadeIn 2s ease-in-out; /* Animation for container */
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border-left: 4px solid #4CAF50;
+        animation: fadeInUp 1s ease-out;
       }
 
-      h1,
-      h2,
-      p,
-      ul,
-      a {
-        margin-bottom: 20px; /* Adds space between sections */
-        animation: slideIn 1.5s ease-out; /* Slide in effect */
+      .tip-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       }
 
-      li {
-        margin-bottom: 15px; /* Adds space between list items */
-      }
-
-      a {
-        display: block;
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #007bff;
+      .tip-card::before {
+        content: "✓";
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        background: #4CAF50;
         color: white;
-        text-decoration: none;
         text-align: center;
-        border-radius: 5px;
-        animation: fadeIn 2s ease-in-out; /* Animation for button */
+        line-height: 30px;
+        border-radius: 50%;
+        margin-right: 15px;
+        font-weight: bold;
+        float: left;
+        margin-top: 2px;
       }
 
-      a:hover {
-        background-color: #0056b3;
+      .meal-plan {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
       }
 
-      /* Keyframes for fade-in effect */
+      .meal-item {
+        background: white;
+        padding: 20px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .meal-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .meal-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: linear-gradient(180deg, #4CAF50, #45a049);
+      }
+
+      .meal-time {
+        font-weight: 700;
+        color: #4CAF50;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .meal-time::before {
+        content: "🍽️";
+        font-size: 1.2rem;
+      }
+
+      .meal-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .meal-option {
+        padding: 12px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border-left: 3px solid #4CAF50;
+      }
+
+      .meal-option.veg {
+        border-left-color: #FF9800;
+      }
+
+      .meal-option.nonveg {
+        border-left-color: #F44336;
+      }
+
+      .meal-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 5px;
+      }
+
+      .meal-label.veg {
+        color: #FF9800;
+      }
+
+      .meal-label.nonveg {
+        color: #F44336;
+      }
+
+      .meal-description {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      .cta-section {
+        text-align: center;
+        padding: 30px;
+        background: linear-gradient(135deg, #e8f5e9, #f1f8e9);
+        border-radius: 15px;
+        margin-bottom: 30px;
+      }
+
+      .cta-text {
+        font-size: 1.1rem;
+        color: #4CAF50;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .cta-subtext {
+        color: #666;
+        font-size: 0.95rem;
+      }
+
+      .back-button {
+        display: inline-block;
+        background: linear-gradient(135deg, #4CAF50, #45a049);
+        color: white;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .back-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .back-button:hover::before {
+        left: 100%;
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+      }
+
+      .back-button:active {
+        transform: translateY(0);
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInDown {
+        0% {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInLeft {
+        0% {
+          opacity: 0;
+          transform: translateX(-30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes slideInRight {
+        0% {
+          opacity: 0;
+          transform: translateX(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
       @keyframes fadeIn {
         0% {
           opacity: 0;
@@ -66,64 +371,213 @@
         }
       }
 
-      /* Keyframes for slide-in effect */
-      @keyframes slideIn {
+      @keyframes shine {
         0% {
-          transform: translateY(20px);
-          opacity: 0;
+          transform: translateX(-100%);
         }
         100% {
-          transform: translateY(0);
-          opacity: 1;
+          transform: translateX(100%);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          margin-top: 10px;
+        }
+
+        .header {
+          padding: 30px 20px;
+        }
+
+        .header h1 {
+          font-size: 2rem;
+        }
+
+        .header .subtitle {
+          font-size: 1rem;
+        }
+
+        .content {
+          padding: 30px 20px;
+        }
+
+        .tips-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .meal-plan {
+          padding: 20px;
+        }
+
+        .meal-options {
+          gap: 8px;
+        }
+
+        .meal-option {
+          padding: 10px;
+        }
+
+        .section h2 {
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h1 {
+          font-size: 1.8rem;
+        }
+
+        .header .subtitle {
+          font-size: 0.9rem;
+        }
+
+        .content {
+          padding: 20px 15px;
+        }
+
+        .tip-card {
+          padding: 15px;
+        }
+
+        .meal-plan {
+          padding: 15px;
+        }
+
+        .meal-item {
+          padding: 15px;
+        }
+
+        .back-button {
+          padding: 12px 25px;
+          font-size: 0.9rem;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Weight Loss Tips</h1>
-      <p>
-        To lose weight, focus on burning more calories than you consume. Tips
-        include:
-      </p>
-      <ul>
-        <li>Eat a balanced diet with fewer processed foods</li>
-        <li>Incorporate daily exercise</li>
-        <li>Stay hydrated</li>
-        <li>Get enough sleep to support metabolism</li>
-      </ul>
-      <h2>Meal Plan: Morning to Night</h2>
-      <ul>
-        <li>
-          <strong>Breakfast (Non-Veg):</strong> Scrambled eggs with spinach and
-          tomatoes, served with a slice of whole-grain toast.<br />
-          <strong>Breakfast (Veg):</strong> Tofu scramble with spinach and
-          tomatoes, served with a slice of whole-grain toast.
-        </li>
-        <li>
-          <strong>Mid-Morning Snack:</strong> A small apple or a handful of
-          mixed berries.
-        </li>
-        <li>
-          <strong>Lunch (Non-Veg):</strong> Grilled chicken salad with mixed
-          greens, cherry tomatoes, cucumber, and a vinaigrette dressing.<br />
-          <strong>Lunch (Veg):</strong> Grilled tofu or chickpea salad with
-          mixed greens, cherry tomatoes, cucumber, and a vinaigrette dressing.
-        </li>
-        <li><strong>Afternoon Snack:</strong> Carrot sticks with hummus.</li>
-        <li>
-          <strong>Dinner (Non-Veg):</strong> Baked salmon with steamed broccoli
-          and quinoa.<br />
-          <strong>Dinner (Veg):</strong> Grilled paneer or roasted chickpeas
-          with steamed broccoli and quinoa.
-        </li>
-        <li>
-          <strong>Evening Snack:</strong> A cup of herbal tea and a small
-          handful of almonds.
-        </li>
-      </ul>
-      <p>Tracking your calorie intake can help you stay on target.</p>
-      <a href="/weg">Back to Home</a>
+      <div class="header">
+        <h1>Weight Loss Guide</h1>
+        <p class="subtitle">Your complete guide to healthy weight management</p>
+      </div>
+
+      <div class="content">
+        <div class="intro">
+          <p>
+            Achieve your weight loss goals with our comprehensive guide. Focus on creating a sustainable caloric deficit through balanced nutrition and regular exercise.
+          </p>
+        </div>
+
+        <div class="section">
+          <h2>Essential Weight Loss Tips</h2>
+          <div class="tips-grid">
+            <div class="tip-card">
+              <strong>Balanced Nutrition</strong><br>
+              Eat a variety of whole foods with fewer processed items. Focus on lean proteins, vegetables, and complex carbohydrates.
+            </div>
+            <div class="tip-card">
+              <strong>Daily Exercise</strong><br>
+              Incorporate both cardio and strength training. Aim for at least 150 minutes of moderate exercise per week.
+            </div>
+            <div class="tip-card">
+              <strong>Stay Hydrated</strong><br>
+              Drink plenty of water throughout the day. Sometimes thirst can be mistaken for hunger.
+            </div>
+            <div class="tip-card">
+              <strong>Quality Sleep</strong><br>
+              Get 7-9 hours of sleep nightly to support metabolism and reduce stress hormones that can lead to weight gain.
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Daily Meal Plan</h2>
+          <div class="meal-plan">
+            <div class="meal-item">
+              <div class="meal-time">Breakfast</div>
+              <div class="meal-options">
+                <div class="meal-option nonveg">
+                  <div class="meal-label nonveg">Non-Vegetarian Option</div>
+                  <div class="meal-description">Scrambled eggs with spinach and tomatoes, served with whole-grain toast</div>
+                </div>
+                <div class="meal-option veg">
+                  <div class="meal-label veg">Vegetarian Option</div>
+                  <div class="meal-description">Tofu scramble with spinach and tomatoes, served with whole-grain toast</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="meal-item">
+              <div class="meal-time">Mid-Morning Snack</div>
+              <div class="meal-options">
+                <div class="meal-option">
+                  <div class="meal-description">A small apple or handful of mixed berries</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="meal-item">
+              <div class="meal-time">Lunch</div>
+              <div class="meal-options">
+                <div class="meal-option nonveg">
+                  <div class="meal-label nonveg">Non-Vegetarian Option</div>
+                  <div class="meal-description">Grilled chicken salad with mixed greens, cherry tomatoes, cucumber, and vinaigrette</div>
+                </div>
+                <div class="meal-option veg">
+                  <div class="meal-label veg">Vegetarian Option</div>
+                  <div class="meal-description">Grilled tofu or chickpea salad with mixed greens, cherry tomatoes, cucumber, and vinaigrette</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="meal-item">
+              <div class="meal-time">Afternoon Snack</div>
+              <div class="meal-options">
+                <div class="meal-option">
+                  <div class="meal-description">Carrot sticks with hummus</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="meal-item">
+              <div class="meal-time">Dinner</div>
+              <div class="meal-options">
+                <div class="meal-option nonveg">
+                  <div class="meal-label nonveg">Non-Vegetarian Option</div>
+                  <div class="meal-description">Baked salmon with steamed broccoli and quinoa</div>
+                </div>
+                <div class="meal-option veg">
+                  <div class="meal-label veg">Vegetarian Option</div>
+                  <div class="meal-description">Grilled paneer or roasted chickpeas with steamed broccoli and quinoa</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="meal-item">
+              <div class="meal-time">Evening Snack</div>
+              <div class="meal-options">
+                <div class="meal-option">
+                  <div class="meal-description">Herbal tea with a small handful of almonds</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-section">
+          <div class="cta-text">Track Your Progress</div>
+          <div class="cta-subtext">Monitoring your calorie intake and exercise can help you stay on target for your weight loss goals</div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="/weg" class="back-button">← Back to Home</a>
+        </div>
+      </div>
     </div>
   </body>
 </html>

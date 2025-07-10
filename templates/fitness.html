@@ -5,125 +5,440 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fitness Tracker with History</title>
     <style>
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-image: url('../static/assets/images/fit.jpg'); /* Replace with your image path */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  color: #333;
-  height: 100vh; /* Ensure the body takes full view height */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-.container {
-  max-width: 600px;
-  padding: 30px 35px; /* Reduced padding for a tighter layout */
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #333;
+      }
 
-      input[type="text"],
-      input[type="number"] {
+      .container {
         width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border-radius: 5px;
-        border: 1px solid #ccc;
+        max-width: 800px;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        backdrop-filter: blur(10px);
       }
 
-      button {
-        padding: 10px 20px;
-        background-color: #28a745;
+      .header {
+        background: linear-gradient(135deg, #28a745, #20c997);
         color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
+        padding: 30px;
+        text-align: center;
+        position: relative;
       }
 
-      .output,
-      .history {
-        margin-top: 20px;
+      .back-button {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.2);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: translateY(-50%) translateX(-2px);
+      }
+
+      .back-button:active {
+        transform: translateY(-50%) translateX(0px);
+      }
+
+      .header h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        opacity: 0.9;
+        font-size: 1.1rem;
+      }
+
+      .content {
+        padding: 30px;
+      }
+
+      .form-section {
+        margin-bottom: 30px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #555;
+        font-size: 0.95rem;
+      }
+
+      .form-group input {
+        padding: 12px 16px;
+        border: 2px solid #e1e5e9;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      .form-group input:focus {
+        outline: none;
+        border-color: #28a745;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+      }
+
+      .button-group {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(40, 167, 69, 0.3);
+      }
+
+      .btn-secondary {
+        background: linear-gradient(135deg, #6c757d, #495057);
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(108, 117, 125, 0.3);
+      }
+
+      .output {
+        margin: 30px 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #e8f5e8, #f0f9ff);
+        border-radius: 15px;
+        border-left: 4px solid #28a745;
+        display: none;
+      }
+
+      .output.show {
+        display: block;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .output h3 {
+        color: #28a745;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .output-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+      }
+
+      .output-item {
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .output-item strong {
+        display: block;
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 5px;
+      }
+
+      .output-item span {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .history-section {
+        margin-top: 30px;
+      }
+
+      .history-section h3 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        text-align: center;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
 
       table {
         width: 100%;
         border-collapse: collapse;
-      }
-
-      th,
-      td {
-        padding: 10px;
-        border: 1px solid #ccc;
+        min-width: 500px;
       }
 
       th {
-        background-color: #28a745;
+        background: linear-gradient(135deg, #28a745, #20c997);
         color: white;
+        padding: 15px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #e1e5e9;
+        color: #555;
+      }
+
+      tbody tr:hover {
+        background: rgba(40, 167, 69, 0.05);
+      }
+
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        font-style: italic;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          max-width: 100%;
+        }
+
+        .header {
+          padding: 20px;
+          position: relative;
+        }
+
+        .back-button {
+          left: 15px;
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+
+        .header h2 {
+          font-size: 1.5rem;
+        }
+
+        .content {
+          padding: 20px;
+        }
+
+        .form-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        .btn {
+          flex: none;
+          width: 100%;
+        }
+
+        .output-grid {
+          grid-template-columns: 1fr;
+        }
+
+        th, td {
+          padding: 10px;
+          font-size: 0.9rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .header h2 {
+          font-size: 1.3rem;
+        }
+
+        .header p {
+          font-size: 1rem;
+        }
+
+        .content {
+          padding: 15px;
+        }
+
+        .form-group input {
+          padding: 10px 12px;
+        }
+
+        .btn {
+          padding: 10px 20px;
+        }
+
+        th, td {
+          padding: 8px;
+          font-size: 0.85rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h2>Fitness Tracker</h2>
-      <form id="fitnessForm">
-        <label for="weight">Weight (kg):</label>
-        <input
-          type="number"
-          id="weight"
-          placeholder="Enter your weight"
-          required
-        />
+      <div class="header">
+        <button class="back-button" onclick="goBack()">
+          ← Back
+        </button>
+        <h2>Fitness Tracker</h2>
+        <p>Track your health metrics and monitor your progress</p>
+      </div>
 
-        <label for="systolicBP">Systolic Blood Pressure (mmHg):</label>
-        <input
-          type="number"
-          id="systolicBP"
-          placeholder="Enter systolic BP"
-          required
-        />
+      <div class="content">
+        <div class="form-section">
+          <form id="fitnessForm">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="weight">Weight (kg)</label>
+                <input
+                  type="number"
+                  id="weight"
+                  placeholder="Enter your weight"
+                  step="0.1"
+                  required
+                />
+              </div>
 
-        <label for="diastolicBP">Diastolic Blood Pressure (mmHg):</label>
-        <input
-          type="number"
-          id="diastolicBP"
-          placeholder="Enter diastolic BP"
-          required
-        />
+              <div class="form-group">
+                <label for="systolicBP">Systolic BP (mmHg)</label>
+                <input
+                  type="number"
+                  id="systolicBP"
+                  placeholder="Enter systolic BP"
+                  required
+                />
+              </div>
 
-        <button type="button" onclick="trackData()">Track Data</button>
-        <button type="button" onclick="clearHistory()">Clear History</button>
-      </form>
+              <div class="form-group">
+                <label for="diastolicBP">Diastolic BP (mmHg)</label>
+                <input
+                  type="number"
+                  id="diastolicBP"
+                  placeholder="Enter diastolic BP"
+                  required
+                />
+              </div>
+            </div>
 
-      <div class="output" id="output"></div>
+            <div class="button-group">
+              <button type="button" class="btn btn-primary" onclick="trackData()">
+                Track Data
+              </button>
+              <button type="button" class="btn btn-secondary" onclick="clearHistory()">
+                Clear History
+              </button>
+            </div>
+          </form>
+        </div>
 
-      <div class="history" id="history">
-        <h3>Tracking History</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Weight (kg)</th>
-              <th>Blood Pressure (mmHg)</th>
-            </tr>
-          </thead>
-          <tbody id="historyTableBody">
-            <!-- History will be displayed here -->
-          </tbody>
-        </table>
+        <div class="output" id="output"></div>
+
+        <div class="history-section">
+          <h3>Tracking History</h3>
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Weight (kg)</th>
+                  <th>Blood Pressure (mmHg)</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr>
+                  <td colspan="3" class="empty-state">No tracking data yet. Add your first entry above!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
 
     <script>
+      // In-memory storage for demo purposes
+      let fitnessHistory = [];
+
       // Function to track data
       function trackData() {
-        console.log("trackData function called"); // Debugging log
+        console.log("trackData function called");
 
         const weight = document.getElementById("weight").value;
         const systolicBP = document.getElementById("systolicBP").value;
@@ -132,69 +447,121 @@ body {
         if (weight && systolicBP && diastolicBP) {
           const entry = {
             date: new Date().toLocaleString(),
-            weight: weight,
-            systolicBP: systolicBP,
-            diastolicBP: diastolicBP,
+            weight: parseFloat(weight),
+            systolicBP: parseInt(systolicBP),
+            diastolicBP: parseInt(diastolicBP),
           };
 
-          // Save to localStorage
-          let history =
-            JSON.parse(localStorage.getItem("fitnessHistory")) || [];
-          history.push(entry);
-          localStorage.setItem("fitnessHistory", JSON.stringify(history));
-
-          console.log("Data saved:", entry); // Debugging log
+          // Save to memory
+          fitnessHistory.push(entry);
+          
+          console.log("Data saved:", entry);
 
           displayLatest(entry);
           displayHistory();
+          
+          // Clear form
+          document.getElementById("fitnessForm").reset();
         } else {
-          document.getElementById("output").innerHTML =
-            "<p>Please fill out all the fields.</p>";
+          document.getElementById("output").innerHTML = `
+            <div class="output-item">
+              <strong>Error:</strong>
+              <span>Please fill out all the fields.</span>
+            </div>
+          `;
+          document.getElementById("output").className = "output show";
         }
       }
 
       // Function to display latest entry
       function displayLatest(entry) {
         document.getElementById("output").innerHTML = `
-                <h3>Tracked Data</h3>
-                <p><strong>Date:</strong> ${entry.date}</p>
-                <p><strong>Weight:</strong> ${entry.weight} kg</p>
-                <p><strong>Blood Pressure:</strong> ${entry.systolicBP}/${entry.diastolicBP} mmHg</p>
-            `;
+          <h3>✅ Data Tracked Successfully</h3>
+          <div class="output-grid">
+            <div class="output-item">
+              <strong>Date & Time:</strong>
+              <span>${entry.date}</span>
+            </div>
+            <div class="output-item">
+              <strong>Weight:</strong>
+              <span>${entry.weight} kg</span>
+            </div>
+            <div class="output-item">
+              <strong>Blood Pressure:</strong>
+              <span>${entry.systolicBP}/${entry.diastolicBP} mmHg</span>
+            </div>
+          </div>
+        `;
+        document.getElementById("output").className = "output show";
       }
 
       // Function to display history
       function displayHistory() {
-        console.log("Displaying history"); // Debugging log
-        let history = JSON.parse(localStorage.getItem("fitnessHistory")) || [];
+        console.log("Displaying history");
         let historyTableBody = document.getElementById("historyTableBody");
-        historyTableBody.innerHTML = "";
+        
+        if (fitnessHistory.length === 0) {
+          historyTableBody.innerHTML = `
+            <tr>
+              <td colspan="3" class="empty-state">No tracking data yet. Add your first entry above!</td>
+            </tr>
+          `;
+          return;
+        }
 
-        history.forEach((entry) => {
+        historyTableBody.innerHTML = "";
+        
+        // Show most recent entries first
+        fitnessHistory.slice().reverse().forEach((entry) => {
           historyTableBody.innerHTML += `
-                    <tr>
-                        <td>${entry.date}</td>
-                        <td>${entry.weight} kg</td>
-                        <td>${entry.systolicBP}/${entry.diastolicBP} mmHg</td>
-                    </tr>
-                `;
+            <tr>
+              <td>${entry.date}</td>
+              <td>${entry.weight} kg</td>
+              <td>${entry.systolicBP}/${entry.diastolicBP} mmHg</td>
+            </tr>
+          `;
         });
 
-        console.log("History displayed:", history); // Debugging log
+        console.log("History displayed:", fitnessHistory);
       }
 
       // Function to clear history
       function clearHistory() {
-        localStorage.removeItem("fitnessHistory");
-        document.getElementById("historyTableBody").innerHTML = "";
-        console.log("History cleared"); // Debugging log
+        if (fitnessHistory.length === 0) {
+          alert("No history to clear!");
+          return;
+        }
+        
+        if (confirm("Are you sure you want to clear all tracking history?")) {
+          fitnessHistory = [];
+          displayHistory();
+          document.getElementById("output").className = "output";
+          console.log("History cleared");
+        }
       }
 
       // Load history when the page loads
       window.onload = function () {
-        console.log("Page loaded"); // Debugging log
+        console.log("Page loaded");
         displayHistory();
       };
+
+      // Add enter key support for form submission
+      document.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          trackData();
+        }
+      });
+
+      // Back button functionality
+      function goBack() {
+        if (window.history.length > 1) {
+          window.history.back();
+        } else {
+          // If no history, show a message or redirect to a default page
+          alert('No previous page to go back to');
+        }
+      }
     </script>
   </body>
 </html>
