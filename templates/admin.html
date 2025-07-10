@@ -1,171 +1,624 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #ffe1d5;
-        background-image: url("../static/assets/images/team.jpg");
-        background-size: cover;
-        background-position: center 20%;
-        background-repeat: no-repeat;
-        color: #333;
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        flex-direction: column; /* Changed to column to include header */
-      }
-      header {
-        background-color: #111111;
-        padding: 20px 0;
-        color: rgb(252, 251, 251);
-      }
-      .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 50px;
-      }
-      .logo {
-        font-size: 1.8rem;
-        font-weight: bold;
-      }
-      nav ul {
-        list-style-type: none;
-        display: flex;
-      }
-      nav ul li {
-        display: inline;
-        margin-left: 20px;
-      }
-      nav ul li a {
-        color: white;
-        text-decoration: none;
-        font-size: 1.1rem;
-      }
-      .container {
-        flex: 1; /* Take remaining space */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-      .main {
-        text-align: center;
-      }
-      .main h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-      }
-      .main .message-input {
-        width: 600px;
-        padding: 15px;
-        font-size: 1.2rem;
-        border: 1px solid #ccc;
-        border-radius: 50px;
-        outline: none;
-      }
-      .main .message-input:focus {
-        border-color: #888;
-      }
-      .main .options {
-        margin-top: 30px;
-        display: flex;
-        gap: 15px;
-        justify-content: center;
-      }
-      .main .options button {
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        background-color: #eaeaea;
-        cursor: pointer;
-        font-size: 1.1rem;
-        transition: background-color 0.3s;
-      }
-      .main .options button:hover {
-        background-color: #ddd;
-      }
-      /* Footer styling */
-      .footer {
-        background-color: #0a0a0a;
-        color: white;
-        text-align: center;
-        padding: 10px 0;
-        margin-top: auto; /* Push footer to the bottom */
-      }
-      .footer p {
-        margin: 5px 0;
-        font-size: 0.9rem;
-      }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 12px 48px rgba(0, 0, 0, 0.15);
+            --shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Animated background particles */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(120, 200, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Header */
+        header {
+            background: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        /* Main container */
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .main {
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .main h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Search container */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-wrapper {
+            position: relative;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+        }
+
+        .search-wrapper:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .search-wrapper:focus-within {
+            border-color: rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1), var(--shadow-medium);
+        }
+
+        .message-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            font-weight: 400;
+            padding: 0.5rem 0;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Options buttons */
+        .options {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .options button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .options button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .options button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .options button:hover::before {
+            left: 0;
+        }
+
+        .options button:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating action elements */
+        .floating-stats {
+            position: absolute;
+            top: 20%;
+            right: 5%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-light);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating-stats h3 {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0.5rem 0;
+        }
+
+        footer p:first-child {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(17, 17, 17, 0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 1rem;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+            }
+
+            nav ul.active {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .floating-stats {
+                display: none;
+            }
+
+            .options {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .options button {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 0.5rem 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .search-wrapper {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .message-input {
+                font-size: 1rem;
+            }
+
+            footer {
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        /* Accessibility improvements */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        /* Focus styles for keyboard navigation */
+        .message-input:focus,
+        .options button:focus,
+        nav ul li a:focus {
+            outline: 2px solid rgba(102, 126, 234, 0.5);
+            outline-offset: 2px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <div class="navbar">
-        <div class="logo">ADMIN DASHBOARD</div>
-        <nav>
-          <ul>
-            <li><a href="homepage1.html">Home</a></li>
-            <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="/admincard">pacient recods</a></li>
-            <!-- Placeholder for login user link -->
-          </ul>
-        </nav>
-      </div>
-    </header>
-    <div class="container">
-      <div class="main">
-        <h1>What do you want to concern today?</h1>
-        <label for="health-issues" style="display: none">Health Issues</label>
-        <input
-          list="health-issues-list"
-          id="health-issues"
-          name="health-issues"
-          class="message-input"
-          placeholder="search health issues..."
-        />
-        <datalist id="health-issues-list">
-          <option value="Diabetes"></option>
-          <option value="Hypertension"></option>
-          <option value="Asthma"></option>
-          <option value="Heart Disease"></option>
-          <option value="Arthritis"></option>
-          <option value="Cancer"></option>
-          <option value="Allergies"></option>
-          <option value="A+"></option>
-          <option value="A-"></option>
-          <option value="B+"></option>
-          <option value="B-"></option>
-          <option value="O+"></option>
-          <option value="O-"></option>
-          <option value="AB+"></option>
-          <option value="AB-"></option>
-        </datalist>
-        <div class="options">
-          <button type="button">Submit</button>
+        <div class="navbar">
+            <div class="logo">ADMIN DASHBOARD</div>
+            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+            <nav>
+              <ul>
+                  <li><a href="homepage1.html">Home</a></li>
+                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="/admincard">Patient Records</a></li>
+                  <li><a href="/" style="
+                      background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+                      color: white;
+                      padding: 8px 16px;
+                      border-radius: 25px;
+                      font-weight: 600;
+                      transition: all 0.3s ease;
+                  " onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                      🔒 Logout
+                  </a></li>
+              </ul>
+          </nav>
+          
         </div>
-      </div>
+    </header>
+
+    <div class="container">
+        <div class="floating-stats">
+            <h3>Quick Stats</h3>
+            <div class="stat-item">
+                <span>Active Patients</span>
+                <span>1,247</span>
+            </div>
+            <div class="stat-item">
+                <span>Pending Cases</span>
+                <span>23</span>
+            </div>
+            <div class="stat-item">
+                <span>Resolved Today</span>
+                <span>156</span>
+            </div>
+        </div>
+
+        <div class="main">
+            <h1>What do you want to concern today?</h1>
+            
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <label for="health-issues" class="sr-only">Search health issues</label>
+                    <input
+                        list="health-issues-list"
+                        id="health-issues"
+                        name="health-issues"
+                        class="message-input"
+                        placeholder="Search health issues, blood types, or patient concerns..."
+                        autocomplete="off"
+                    />
+                    <span class="search-icon">🔍</span>
+                </div>
+                <datalist id="health-issues-list">
+                    <option value="Diabetes">Diabetes - Blood sugar management</option>
+                    <option value="Hypertension">Hypertension - Blood pressure monitoring</option>
+                    <option value="Asthma">Asthma - Respiratory condition</option>
+                    <option value="Heart Disease">Heart Disease - Cardiovascular health</option>
+                    <option value="Arthritis">Arthritis - Joint inflammation</option>
+                    <option value="Cancer">Cancer - Oncology concerns</option>
+                    <option value="Allergies">Allergies - Immune responses</option>
+                    <option value="A+">A+ Blood Type</option>
+                    <option value="A-">A- Blood Type</option>
+                    <option value="B+">B+ Blood Type</option>
+                    <option value="B-">B- Blood Type</option>
+                    <option value="O+">O+ Blood Type</option>
+                    <option value="O-">O- Blood Type</option>
+                    <option value="AB+">AB+ Blood Type</option>
+                    <option value="AB-">AB- Blood Type</option>
+                </datalist>
+            </div>
+
+            <div class="options">
+                <button type="button" id="submit-btn">Submit Query</button>
+                <button type="button" id="clear-btn">Clear Search</button>
+            </div>
+        </div>
     </div>
-    <footer class="footer">
-      <p>&copy; 2024 Medical. All Rights Reserved.</p>
-      <p>
-        Admin Dashboard Overview: This admin dashboard allows you to monitor and
-        manage different aspects of the platform. Here, you can check and update
-        information, address patient concerns, and handle other administrative
-        tasks.
-      </p>
+
+    <footer>
+        <p>&copy; 2024 Medical Dashboard. All Rights Reserved.</p>
+        <p>
+            Advanced Admin Dashboard: Monitor patient records, manage health concerns, and streamline administrative tasks with our intuitive interface. Built for healthcare professionals who demand efficiency and clarity.
+        </p>
     </footer>
-  </body>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.navbar')) {
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('health-issues');
+        const submitBtn = document.getElementById('submit-btn');
+        const clearBtn = document.getElementById('clear-btn');
+
+        // Submit button animation and functionality
+        submitBtn.addEventListener('click', () => {
+            const query = searchInput.value.trim();
+            if (query) {
+                // Add loading state
+                submitBtn.innerHTML = '🔄 Processing...';
+                submitBtn.disabled = true;
+                
+                // Simulate processing
+                setTimeout(() => {
+                    alert(`Query submitted: ${query}`);
+                    submitBtn.innerHTML = 'Submit Query';
+                    submitBtn.disabled = false;
+                }, 1500);
+            } else {
+                // Shake animation for empty input
+                searchInput.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    searchInput.style.animation = '';
+                }, 500);
+            }
+        });
+
+        // Clear button functionality
+        clearBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+        });
+
+        // Enter key support
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                submitBtn.click();
+            }
+        });
+
+        // Add shake animation for empty input
+        const shakeStyle = document.createElement('style');
+        shakeStyle.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(shakeStyle);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add visual feedback for button interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            
+            button.addEventListener('mouseup', () => {
+                button.style.transform = '';
+            });
+        });
+    </script>
+</body>
 </html>

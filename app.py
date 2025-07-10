@@ -201,22 +201,33 @@ def doctorsignup():
   admin.insert_one({"name":a,"email":b,"hospitaname":c,"password":d})
   return render_template("doctorlogin.html")
 
-@app.route("/doctorlogin", methods=["POST"])
+@app.route("/doctorlogin", methods=["GET", "POST"])
 def doctorlogin():
-    email = request.form.get("email")
-    password = request.form.get("password")
+    if request.method == "POST":
+        email = request.form.get("email").strip()
+        password = request.form.get("password").strip()
 
-    # ✅ Check admin credentials from MongoDB, not hardcoded
-    admin_user = admin.find_one({"email": email, "password": password})
+        print(f"🔍 Attempting login with email: {email}, password: {password}")
 
-    if admin_user:
-        session['email'] = email
-        session['role'] = 'admin'
-        print("✅ Login successful")
-        return redirect(url_for("adminhome"))
+        admin_user = admin.find_one({"email": email})
+        print(f"🧾 From DB: {admin_user}")
 
-    print("❌ Login failed")
-    return render_template("doctorlogin.html", status="Invalid credentials")
+        if admin_user:
+            if admin_user.get("password") == password:
+                print("✅ Login successful")
+                session['email'] = email
+                session['role'] = 'admin'
+                return redirect(url_for("adminhome"))
+            else:
+                print("❌ Password mismatch")
+        else:
+            print("❌ Email not found")
+
+        return render_template("doctorlogin.html", status="Invalid credentials")
+
+    return render_template("doctorlogin.html")
+
+
 
 
 

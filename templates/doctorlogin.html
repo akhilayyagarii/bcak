@@ -1,173 +1,732 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Doctor Login</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Login - Healthcare Portal</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #f8f9fa;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 100vh;
-        padding: 0 10%;
-      }
-      .login-container {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        max-width: 1200px;
-      }
-      .left-side {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .right-side {
-        flex: 1;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 40px;
-      }
-      .right-side h2 {
-        margin-bottom: 20px;
-        font-size: 24px;
-        color: #333;
-      }
-      .right-side input[type="email"],
-      .right-side input[type="password"] {
-        width: 100%;
-        padding: 15px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      .right-side button {
-        width: 100%;
-        padding: 15px;
-        background-color: #00adef;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-      }
-      .right-side button:hover {
-        background-color: #007bbf;
-      }
-      .alt-login {
-        margin: 15px 0;
-        text-align: center;
-      }
-      .alt-login a {
-        margin: 0 10px;
-        text-decoration: none;
-        font-size: 14px;
-        color: #333;
-      }
-      .alt-login a:hover {
-        text-decoration: underline;
-      }
-      .help-link {
-        text-align: right;
-        margin-top: 5px;
-      }
-      .help-link a {
-        font-size: 12px;
-        text-decoration: none;
-        color: #007bbf;
-      }
-      .help-link a:hover {
-        text-decoration: underline;
-      }
-      .doctor-welcome {
-        font-size: 32px;
-        color: #333;
-        margin-bottom: 10px;
-      }
-      .tagline {
-        font-size: 16px;
-        margin-bottom: 30px;
-      }
-      .remember-me {
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      .remember-me input {
-        margin-right: 10px;
-      }
-      /* Left side illustration area */
-      .left-side img {
-        max-width: 100%;
-        height: auto;
-      }
-      .footer {
-        text-align: center;
-        margin-top: 30px;
-        font-size: 12px;
-        color: #666;
-      }
-      .terms-link {
-        color: #007bbf;
-        text-decoration: none;
-      }
-      .terms-link:hover {
-        text-decoration: underline;
-      }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="medical-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23medical-grid)"/></svg>');
+            pointer-events: none;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            overflow: hidden;
+            min-height: 650px;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .left-side {
+            flex: 1;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+            color: white;
+        }
+
+        .left-side::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M45 20 L55 20 L55 45 L80 45 L80 55 L55 55 L55 80 L45 80 L45 55 L20 55 L20 45 L45 45 Z" fill="rgba(255,255,255,0.1)"/><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="25" r="1.5" fill="rgba(255,255,255,0.05)"/><circle cx="25" cy="75" r="1" fill="rgba(255,255,255,0.05)"/><circle cx="75" cy="75" r="2" fill="rgba(255,255,255,0.05)"/></svg>');
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .medical-icon {
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 56px;
+            animation: pulse 3s infinite;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .left-content {
+            text-align: center;
+            z-index: 1;
+        }
+
+        .left-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .left-content p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .right-side {
+            flex: 1;
+            padding: 60px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            color: #1a1a1a;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #4facfe;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+            transform: translateY(-2px);
+        }
+
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #6b7280;
+            font-size: 18px;
+            padding: 4px;
+            border-radius: 4px;
+            transition: color 0.2s;
+        }
+
+        .password-toggle:hover {
+            color: #374151;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: auto;
+            margin-right: 12px;
+            padding: 0;
+            transform: scale(1.2);
+            accent-color: #4facfe;
+        }
+
+        .remember-me label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .login-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .login-btn:hover::before {
+            left: 100%;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(79, 172, 254, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            background: #d1d5db;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .loading {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .help-link {
+            text-align: right;
+            margin-bottom: 24px;
+        }
+
+        .help-link a {
+            color: #4facfe;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .help-link a:hover {
+            color: #00f2fe;
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        .google-login {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: white;
+            color: #374151;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .google-login:hover {
+            border-color: #4facfe;
+            background: #f8fafc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.15);
+        }
+
+        .footer {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        .footer a {
+            color: #4facfe;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: #00f2fe;
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .status-message {
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+
+        .status-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        .status-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                min-height: auto;
+                margin: 16px;
+                border-radius: 20px;
+            }
+
+            .left-side {
+                order: -1;
+                min-height: 250px;
+                padding: 40px 30px;
+            }
+
+            .medical-icon {
+                width: 100px;
+                height: 100px;
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+
+            .left-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .left-content p {
+                font-size: 1rem;
+            }
+
+            .stats {
+                margin-top: 20px;
+            }
+
+            .stat-number {
+                font-size: 1.4rem;
+            }
+
+            .right-side {
+                padding: 40px 30px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .right-side {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            input {
+                padding: 16px;
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+
+            .remember-me {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        *:focus-visible {
+            outline: 2px solid #4facfe;
+            outline-offset: 2px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="login-container">
-      <!-- Left Side (Illustration) -->
-      <div class="left-side">
-        <img src="../static/assets/images/doclogin.jpg" alt="Doctors Illustration" />
-      </div>
-
-      <!-- Right Side (Login Form) -->
-      <div class="right-side">
-        <h2 class="doctor-welcome">Welcome Back Doctor!</h2>
-        <p class="tagline">Let’s get you logged in</p>
-        <form action="/doctorlogin" method="post">
-          <input type="email" name="email" placeholder="Email" required />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-          />
-
-          <div class="remember-me">
-            <input type="checkbox" name="remember" />
-            <label for="remember">Remember Me!</label>
-          </div>
-
-          <button type="submit">Login</button>
-
-          <div class="help-link">
-            <a href="/docsignup">signup</a>
-          </div>
-        </form>
-
-        <!-- Alternative Login Options -->
-        <div class="alt-login">
-          <a href="#">Login with Google</a>
+        <div class="left-side">
+            <div class="medical-icon">🩺</div>
+            <div class="left-content">
+                <h2>Healthcare Portal</h2>
+                <p>Secure access for healthcare professionals. Manage patient records, appointments, and medical data with advanced security.</p>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">50K+</div>
+                        <div class="stat-label">Doctors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1M+</div>
+                        <div class="stat-label">Patients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">99.9%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="footer">
-          <p>All Rights are Reserved</p>
-          <a href="#" class="terms-link">Terms and Conditions</a>
+        <div class="right-side">
+            <div class="header">
+                <h1>Welcome Back Doctor!</h1>
+                <p>Please sign in to access your medical portal</p>
+            </div>
+
+            <div class="status-message" id="statusMessage"></div>
+
+            <form id="doctorLoginForm" action="/doctorlogin" method="post">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your medical email" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter your secure password" required>
+                        <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Keep me signed in for 30 days</label>
+                </div>
+
+                <button type="submit" class="login-btn" id="loginBtn">
+                    <span class="btn-text">Access Medical Portal</span>
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <span>Authenticating...</span>
+                    </div>
+                </button>
+
+                <div class="help-link">
+                    <a href="/docsignup">New doctor? Create account</a>
+                </div>
+            </form>
+
+            <div class="divider">
+                <span>Or continue with</span>
+            </div>
+
+            <a href="#" class="google-login" id="googleLogin">
+                <span>🏥</span>
+                Login with Hospital ID
+            </a>
+
+            <div class="footer">
+                <p>© 2025 Healthcare Portal. All rights reserved.</p>
+                <p>
+                    <a href="#" class="terms-link">Privacy Policy</a> • 
+                    <a href="#" class="terms-link">Terms of Service</a> • 
+                    <a href="#" class="terms-link">HIPAA Compliance</a>
+                </p>
+            </div>
         </div>
-      </div>
     </div>
-  </body>
+
+    <script>
+        const form = document.getElementById('doctorLoginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const loading = document.getElementById('loading');
+        const btnText = document.querySelector('.btn-text');
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+        const statusMessage = document.getElementById('statusMessage');
+        const googleLogin = document.getElementById('googleLogin');
+
+        // Password visibility toggle
+        passwordToggle.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            passwordToggle.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Form validation
+        function validateField(field, errorElement, validator) {
+            const value = field.value.trim();
+            const error = validator(value);
+            
+            if (error) {
+                errorElement.textContent = error;
+                errorElement.style.display = 'block';
+                field.style.borderColor = '#ef4444';
+                return false;
+            } else {
+                errorElement.style.display = 'none';
+                field.style.borderColor = '#10b981';
+                return true;
+            }
+        }
+
+        const validators = {
+            email: (value) => {
+                if (!value) return 'Email is required';
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Please enter a valid email address';
+                return null;
+            },
+            password: (value) => value.length < 1 ? 'Password is required' : null
+        };
+
+        // Real-time validation
+        const emailField = document.getElementById('email');
+        const passwordField = document.getElementById('password');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
+
+        emailField.addEventListener('blur', () => {
+            validateField(emailField, emailError, validators.email);
+        });
+
+        passwordField.addEventListener('blur', () => {
+            validateField(passwordField, passwordError, validators.password);
+        });
+
+        // Show status message
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${type}`;
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 5000);
+        }
+
+        // Form submission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailValid = validateField(emailField, emailError, validators.email);
+            const passwordValid = validateField(passwordField, passwordError, validators.password);
+        
+            if (emailValid && passwordValid) {
+                // Show loading state
+                loginBtn.disabled = true;
+                btnText.style.display = 'none';
+                loading.style.display = 'flex';
+        
+                // Simulate authentication process
+                setTimeout(() => {
+                    // Show success message
+                    showStatus('Authentication successful! Redirecting to medical portal...', 'success');
+        
+                    // Submit the form to Flask
+                    form.submit(); // ✅ enable this
+                }, 1000); // faster
+            }
+        });
+        
+
+        // Google login handler
+        googleLogin.addEventListener('click', function(e) {
+            e.preventDefault();
+            showStatus('Hospital ID authentication will be implemented soon!', 'error');
+        });
+
+        // Smooth animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.form-group').forEach(group => {
+            group.style.opacity = '0';
+            group.style.transform = 'translateY(20px)';
+            group.style.transition = 'all 0.6s ease';
+            observer.observe(group);
+        });
+
+        // Add some medical-themed interactions
+        const medicalIcon = document.querySelector('.medical-icon');
+        medicalIcon.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.1) rotate(5deg)';
+        });
+
+        medicalIcon.addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1) rotate(0deg)';
+        });
+    </script>
+</body>
 </html>

@@ -1,434 +1,722 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About Us</title>
+    <title>About Us - Medical Health Management</title>
     <style>
-            /* Basic Styling for Sections */
-            body {
-              font-family: Arial, sans-serif;
-              margin: 0;
-              padding: 0;
-            }
-            header {
-              background-color: #0a0a0a;
-              padding: 20px 0;
-              color: rgb(248, 245, 245);
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(20px);
+            padding: 1rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-nav ul {
+            flex-direction: column;
+            gap: 0;
+            padding: 0 2rem;
+        }
+
+        .mobile-nav ul li a {
+            display: block;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)),
+                        url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 150px 2rem 100px;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Advantages Section */
+        .advantages {
+            padding: 100px 2rem;
+            background: #f8fafc;
+        }
+
+        .advantages-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .advantage-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .advantage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .advantage-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .advantage-card p {
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Animation delays */
+        .advantage-card:nth-child(1) { animation-delay: 0.1s; }
+        .advantage-card:nth-child(2) { animation-delay: 0.2s; }
+        .advantage-card:nth-child(3) { animation-delay: 0.3s; }
+        .advantage-card:nth-child(4) { animation-delay: 0.4s; }
+        .advantage-card:nth-child(5) { animation-delay: 0.5s; }
+        .advantage-card:nth-child(6) { animation-delay: 0.6s; }
+        .advantage-card:nth-child(7) { animation-delay: 0.7s; }
+
+        /* Team Section */
+        .team {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+            padding: 100px 2rem;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .team h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .team-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .team-member img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .team-member h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
             .navbar {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 0 50px;
+                padding: 1rem;
             }
 
-            .logo {
-              font-size: 1.8rem;
-              font-weight: bold;
+            .mobile-menu {
+                display: block;
             }
 
             nav ul {
-              list-style-type: none;
-              display: flex;
+                display: none;
             }
 
-            nav ul li {
-              display: inline;
-              margin-left: 20px;
+            .mobile-nav.active {
+                display: block;
             }
 
-            nav ul li a {
-              color: rgb(254, 253, 253);
-              text-decoration: none;
-              font-size: 1.1rem;
+            .hero {
+                padding: 120px 1rem 80px;
+                background-attachment: scroll;
             }
 
-            /* Dropdown styling */
-            .dropdown {
-              position: relative;
-              display: inline-block;
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
-            .dropdown-btn {
-              background-color: #f1f1f1;
-              border: none;
-              color: black;
-              padding: 10px 16px;
-              font-size: 16px;
-              cursor: pointer;
+            .hero p {
+                font-size: 1.1rem;
             }
 
-            .dropdown-content {
-              display: none;
-              position: absolute;
-              background-color: #fff;
-              box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-              z-index: 1;
-              width: 200px;
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
             }
 
-            .dropdown-content a {
-              color: black;
-              padding: 12px 16px;
-              text-decoration: none;
-              display: block;
+            .stat-item {
+                min-width: 200px;
             }
 
-            .dropdown:hover .dropdown-content {
-              display: block;
+            .advantages {
+                padding: 60px 1rem;
             }
 
-            .dropdown-content a:hover {
-              background-color: #f1f1f1;
+            .section-title {
+                font-size: 2.2rem;
             }
 
-            .navbar-right {
-              display: flex;
-              align-items: center;
+            .advantages-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
-            section {
-              padding: 50px 20px;
-              text-align: center;
-            }
-
-            section h2 {
-              font-size: 2.5em;
-              margin-bottom: 20px;
-            }
-
-            section p {
-              font-size: 1.2em;
-              line-height: 1.6;
-              max-width: 800px;
-              margin: 0 auto;
-            }
-
-            /* About Us Section with Background Image */
-            #about-us {
-              background-image: url("https://xtentertainment.com/wp-content/uploads/2015/03/Contact-us-Background.jpg");
-              background-size: cover;
-              background-position: center;
-              background-repeat: no-repeat;
-              color: white;
-            }
-
-            /* Advantages Section */
-            #advantages {
-              background-color: #ffffff;
-            }
-
-            .advantages-container {
-              display: flex;
-              justify-content: center;
-              flex-wrap: wrap;
-              gap: 20px; /* Reduced gap between boxes */
-              max-width: 1200px;
-              margin: 0 auto;
-            }
-
-      .advantage-card {
-        background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background to see the blur */
-        border-radius: 8px;
-        padding: 15px; /* Reduced padding */
-        width: 200px; /* Reduced width */
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        text-align: left;
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 1s forwards;
-        position: relative;
-        color: black; /* Black text color */
-      }
-
-      /* Overlay effect for blurring */
-      .advantage-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.9); /* Dark overlay */
-        border-radius: 8px;
-        backdrop-filter: blur(4px); /* Blur effect */
-      }
-
-      /* Ensure text and headings are visible */
-      .advantage-card h3,
-      .advantage-card p {
-        position: relative;
-        z-index: 1;
-        color: black; /* Ensure text is black */
-      }
-
-            }
-
-            /* Adding background to 'Our Mission' card */
-            .advantage-card.mission {
-              background-image: url("https://www.projectmanager.com/wp-content/uploads/2018/11/181112_Blog_Feature_Mission.jpg");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'Our Vision' card */
-            .advantage-card.vision {
-              background-image: url("https://www.projectmanager.com/wp-content/uploads/2018/05/181126_Blog_Feature_Vision_Statement.jpg");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'User Experience' card */
-            .advantage-card.user-experience {
-              background-image: url("https://st2.depositphotos.com/2801893/10799/v/950/depositphotos_107999614-stock-illustration-user-experience-concept.jpg");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'Privacy & Security' card */
-            .advantage-card.privacy-security {
-              background-image: url("https://www.imprivata.com/sites/imprivata/files/fairwarning/5-Ways-to-Create-a-Culture-of-Patient-Data-Privacy-in-Healthcare.png");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'Seamless Integration' card */
-            .advantage-card.seamless-integration {
-              background-image: url("https://as1.ftcdn.net/v2/jpg/01/08/52/08/1000_F_108520851_XUodFZmKfUmPuBVLyAMkYFrY482zYccw.jpg");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'Customizable Plans' card */
-            .advantage-card.customizable-plans {
-              background-image: url("https://c8.alamy.com/comp/2K4WWPT/sign-displaying-health-plan-word-written-on-type-of-insurance-that-covers-highcost-medical-services-2K4WWPT.jpg");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Adding background to 'Advanced Analytics' card */
-            .advantage-card.advanced-analytics {
-              background-image: url("https://mitsind.com/wp-content/uploads/2017/11/Advanced-Analytics.png");
-              background-size: cover;
-              background-position: center;
-              color: white;
-            }
-
-            /* Text overlay effect for better readability */
-            .advantage-card::before {
-              content: "";
-              position: absolute;
-              top: 0;
-              left: 0;
-              right: 0;
-              bottom: 0;
-              background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-              border-radius: 8px;
-            }
-
-            .advantage-card h3,
-            .advantage-card p {
-              position: relative; /* To display over the overlay */
-              z-index: 1;
-            }
-
-            /* Adding delay for each card to stagger animations */
-            .advantage-card:nth-child(1) {
-              animation-delay: 0.2s;
-            }
-            .advantage-card:nth-child(2) {
-              animation-delay: 0.4s;
-            }
-            .advantage-card:nth-child(3) {
-              animation-delay: 0.6s;
-            }
-            .advantage-card:nth-child(4) {
-              animation-delay: 0.8s;
-            }
-            .advantage-card:nth-child(5) {
-              animation-delay: 1s;
-            }
-            .advantage-card:nth-child(6) {
-              animation-delay: 1.2s;
-            }
-            .advantage-card:nth-child(7) {
-              animation-delay: 1.4s;
-            }
-
-            /* Animation keyframes */
-            @keyframes fadeInUp {
-              0% {
-                opacity: 0;
-                transform: translateY(20px);
-              }
-              100% {
-                opacity: 1;
-                transform: translateY(0);
-              }
-            }
-
-            /* Footer with Team Pics */
-            footer {
-              background-color: #000000;
-              color: #fff;
-              padding: 50px 20px;
+            .advantage-card {
+                padding: 1.5rem;
             }
 
             .team {
-              text-align: center;
+                padding: 60px 1rem;
             }
 
             .team h2 {
-              font-size: 2.5em;
-              margin-bottom: 20px;
+                font-size: 2.2rem;
             }
 
-            .team-pics {
-              display: flex;
-              justify-content: center;
-              flex-wrap: wrap;
-              gap: 30px;
+            .team-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .team-member {
-              text-align: center;
+            .section-title {
+                font-size: 1.8rem;
             }
 
-            .team-member img {
-              width: 150px;
-              height: 150px;
-              border-radius: 50%;
-              object-fit: cover;
+            .advantages-grid {
+                grid-template-columns: 1fr;
             }
 
-            .team-member p {
-              margin-top: 10px;
-              font-size: 1.2em;
+            .advantage-card {
+                padding: 1rem;
             }
+        }
 
-            .copyright {
-              margin-top: 20px;
-              font-size: 0.9em;
-              color: #ccc; /* Lighter color for copyright text */
-              text-align: center;
-            }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
+    <!-- Header -->
     <header>
-      <div class="navbar">
-        <div class="logo">MEDICAL</div>
-        <nav>
-          <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/patient records">Patient Records</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-        </nav>
-        <!-- Username and Dropdown on the right side -->
-       
-      </div>
+        <div class="navbar">
+            <a href="#" class="logo">MEDICAL</a>
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/patient records">Patient Records</a></li>
+                    <li><a href="/services">Services</a></li>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
+        </div>
+        <div class="mobile-nav" id="mobileNav">
+            <ul>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/patient-records">Patient Records</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
     </header>
-    <!-- About Us Section -->
-    <section id="about-us">
-      <h2>About Us</h2>
-      <p>
-        We are a dedicated team committed to improving health management
-        solutions. Our goal is to provide users with the tools they need to
-        efficiently track and manage their health data, empowering them to live
-        healthier lives. With a focus on user experience, privacy, and
-        innovation, we aim to revolutionize the way people interact with their
-        health information.
-      </p>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Revolutionizing Healthcare Management</h1>
+            <p>
+                We are a dedicated team committed to improving health management solutions. 
+                Our goal is to provide users with innovative tools to efficiently track and 
+                manage their health data, empowering them to live healthier lives.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Happy Patients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Healthcare Partners</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Support Available</span>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- Advantages Section (As Cards) -->
-    <section id="advantages">
-      <h2>Advantages of Our Project</h2>
-      <div class="advantages-container">
-        <div class="advantage-card mission">
-          <h3>Our Mission</h3>
-          <p>
-            To provide innovative health management tools that empower
-            individuals to take control of their well-being, enhancing personal
-            health tracking and simplifying the management of health data.
-          </p>
+    <!-- Advantages Section -->
+    <section class="advantages">
+        <div class="advantages-container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Our Platform?</h2>
+                <p class="section-subtitle">
+                    Discover the advantages that make our healthcare management system 
+                    the preferred choice for medical professionals and patients alike.
+                </p>
+            </div>
+            
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Our Mission</h3>
+                    <p>
+                        To provide innovative health management tools that empower
+                        individuals to take control of their well-being, enhancing personal
+                        health tracking and simplifying the management of health data.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">👁️</div>
+                    <h3>Our Vision</h3>
+                    <p>
+                        We envision a world where people have easy access to their health
+                        data, enabling them to make informed decisions and lead healthier
+                        lives through technology-driven solutions.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">✨</div>
+                    <h3>User Experience</h3>
+                    <p>
+                        Enhanced user experience through an intuitive interface that
+                        simplifies health data tracking with modern design principles
+                        and seamless interactions.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">🔒</div>
+                    <h3>Privacy & Security</h3>
+                    <p>
+                        Enterprise-grade security measures and strict privacy protocols
+                        ensure your personal health data remains protected and confidential
+                        at all times.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Seamless Integration</h3>
+                    <p>
+                        Perfect integration with existing health management systems,
+                        wearable devices, and electronic health records for a
+                        comprehensive healthcare solution.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">⚙️</div>
+                    <h3>Customizable Plans</h3>
+                    <p>
+                        Flexible, customizable health plans and analytics tailored
+                        to individual needs, providing personalized health management
+                        solutions for every user.
+                    </p>
+                </div>
+                
+                <div class="advantage-card">
+                    <div class="card-icon">📊</div>
+                    <h3>Advanced Analytics</h3>
+                    <p>
+                        Powerful analytics and machine learning algorithms help identify
+                        health trends and provide actionable insights for better health
+                        outcomes and preventive care.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="advantage-card vision">
-          <h3>Our Vision</h3>
-          <p>
-            We envision a world where people have easy access to their health
-            data, enabling them to make informed decisions and lead healthier
-            lives.
-          </p>
-        </div>
-        <div class="advantage-card user-experience">
-          <h3>User Experience</h3>
-          <p>
-            Enhanced user experience through an intuitive interface that
-            simplifies health data tracking.
-          </p>
-        </div>
-        <div class="advantage-card privacy-security">
-          <h3>Privacy & Security</h3>
-          <p>Increased privacy and security for users' personal health data.</p>
-        </div>
-        <div class="advantage-card seamless-integration">
-          <h3>Seamless Integration</h3>
-          <p>
-            Seamless integration with existing health management systems and
-            wearable devices.
-          </p>
-        </div>
-        <div class="advantage-card customizable-plans">
-          <h3>Customizable Plans</h3>
-          <p>
-            Customizable health plans and analytics for personalized health
-            management.
-          </p>
-        </div>
-        <div class="advantage-card advanced-analytics">
-          <h3>Advanced Analytics</h3>
-          <p>
-            Our advanced analytics help identify trends and provide actionable
-            insights for better health outcomes.
-          </p>
-        </div>
-      </div>
     </section>
 
-    <!-- Footer Section -->
+    <!-- Team Section -->
+    <section class="team">
+        <div class="team-container">
+            <h2>Meet Our Team</h2>
+            <p class="team-subtitle">
+                The passionate individuals behind our innovative healthcare solutions
+            </p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Akhil" />
+                    <h3>Akhil</h3>
+                    <p>Lead Developer & Co-Founder</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Chandhu" />
+                    <h3>Chandhu</h3>
+                    <p>Backend Engineer & System Architect</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b39c2a31?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80" alt="Mahalakshmi" />
+                    <h3>Mahalakshmi</h3>
+                    <p>UI/UX Designer & Product Manager</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-      <div class="team">
-        <h2>Our Team</h2>
-        <div class="team-pics">
-          <div class="team-member">
-            <img alt="Team Member 1" />
-            <p>akhil</p>
-          </div>
-          <div class="team-member">
-            <img alt="Team Member 2" />
-            <p>chandhu</p>
-          </div>
-          <div class="team-member">
-            <img alt="Team Member 6" />
-            <p>mahalakshmi</p>
-          </div>
+        <div class="copyright">
+            <p>&copy; 2024 Medical Health Management. All rights reserved.</p>
         </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2024 Health Management Project. All rights reserved.</p>
-      </div>
     </footer>
-  </body>
+
+    <script>
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!mobileNav.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.advantage-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
 </html>

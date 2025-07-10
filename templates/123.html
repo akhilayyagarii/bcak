@@ -5,72 +5,349 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Records</title>
     <style>
-        form {
-            display: flex;
-            justify-content: center;
-            margin: 20px;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        input[type="text"] {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-        }
-        button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-weight: 300;
         }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: background 0.3s ease, transform 0.2s ease;
+            margin-bottom: 30px;
+            text-align: center;
         }
-        th {
-            background-color: #f2f2f2;
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            transform: translateY(-2px);
+        }
+
+        .search-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 0;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            background: #f8f9fa;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            background: #fff;
+            box-shadow: inset 0 0 0 2px #667eea;
+        }
+
+        .search-input::placeholder {
+            color: #999;
+        }
+
+        .search-btn {
+            padding: 15px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            min-width: 100px;
+        }
+
+        .search-btn:hover {
+            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .results-section {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .results-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        .results-content {
+            padding: 30px;
+        }
+
+        .record-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid #667eea;
+        }
+
+        .record-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .record-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .record-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .record-label {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .record-value {
+            font-size: 1.1rem;
+            color: #333;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+
+        .record-value.highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 500;
+        }
+
+        .bp-reading {
+            background: #e3f2fd;
+            border-left: 3px solid #2196f3;
+            font-weight: 600;
+        }
+
+        .blood-group {
+            background: #fff3e0;
+            border-left: 3px solid #ff9800;
+            font-weight: 600;
+        }
+
+        .sugar-level {
+            background: #f3e5f5;
+            border-left: 3px solid #9c27b0;
+            font-weight: 600;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .search-form {
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .search-input {
+                border-radius: 10px 10px 0 0;
+                font-size: 16px;
+            }
+
+            .search-btn {
+                border-radius: 0 0 10px 10px;
+                padding: 15px;
+            }
+
+            .record-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .search-input:focus,
+        .search-btn:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
         }
     </style>
 </head>
 <body>
-    <h1>Search Records</h1>
-    <!-- Search Form -->
-    <form method="GET" action="/admincard">
-        <input type="text" name="query" placeholder="Search by name or email" required>
-        <button type="submit">Search</button>
-      </form>
-      
+    <div class="container">
+        <h1>🔍 Search Medical Records</h1>
+        <div style="text-align: center;">
+            <a href="/adminhome" class="back-btn">← Back to Home</a>
+        </div>
 
-        <h2>Search Results:</h2>
-        <table>
-            {% for record in records %}
-              <tr><th>Name</th><td>{{ record['name'] }}</td></tr>
-              <tr><th>Email</th><td>{{ record['email'] }}</td></tr>
-              <tr><th>Phone</th><td>{{ record['phone'] }}</td></tr>
-              <tr><th>Blood Group</th><td>{{ record['blood-type'] }}</td></tr>
-              <tr><th>Sugar Level</th><td>{{ record['sugar-level'] }}</td></tr>
-              <tr><th>Blood Pressure</th><td>{{ record['bp-systolic'] }}/{{ record['bp-diastolic'] }}</td></tr>
-              <tr><th>Past Operations</th><td>{{ record['past-operations-number'] }}</td></tr>
-              <tr><th>Operation Details</th><td>{{ record['operation-details'] }}</td></tr>
-              <tr><td colspan="2"><hr></td></tr>
-            {% endfor %}
-          </table>
-          
-  
+        <!-- Search Form -->
+        <div class="search-section">
+            <form method="GET" action="/admincard" class="search-form">
+                <input type="text" name="query" class="search-input" placeholder="Search by name or email" required>
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section">
+            <div class="results-header">
+                📋 Search Results
+            </div>
+            <div class="results-content">
+                {% if records %}
+                    {% for record in records %}
+                    <div class="record-card">
+                        <div class="record-grid">
+                            <div class="record-item">
+                                <div class="record-label">👤 Full Name</div>
+                                <div class="record-value highlight">{{ record['name'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">📧 Email</div>
+                                <div class="record-value">{{ record['email'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">📞 Phone</div>
+                                <div class="record-value">{{ record['phone'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">🩸 Blood Group</div>
+                                <div class="record-value blood-group">{{ record['blood-type'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">🍯 Sugar Level</div>
+                                <div class="record-value sugar-level">{{ record['sugar-level'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">❤️ Blood Pressure</div>
+                                <div class="record-value bp-reading">{{ record['bp-systolic'] }}/{{ record['bp-diastolic'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">🏥 Past Operations</div>
+                                <div class="record-value">{{ record['past-operations-number'] }}</div>
+                            </div>
+                            <div class="record-item">
+                                <div class="record-label">📝 Operation Details</div>
+                                <div class="record-value">{{ record['operation-details'] }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-state">
+                        <div style="font-size: 4rem; margin-bottom: 20px;">🔍</div>
+                        <h3>No records found</h3>
+                        <p>Try searching with a different name or email address.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

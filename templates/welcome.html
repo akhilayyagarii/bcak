@@ -1,109 +1,702 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome Page with Animated Background</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Healthcare Portal</title>
+    <meta name="description" content="Welcome to our healthcare platform. Access your patient portal or admin dashboard.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body,
-      html {
-        height: 100%;
-        font-family: Arial, sans-serif;
-      }
-
-      /* Container for content */
-      .container {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: white;
-        text-align: center;
-        z-index: 1;
-        background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
-      }
-
-      /* Background animation */
-      body::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url("../static/assets/images/welcome.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: -1;
-        opacity: 0;
-        animation: fadeIn 2s ease-in-out forwards;
-      }
-
-      /* Fade-in animation */
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.9);
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+            --shadow-heavy: 0 15px 35px rgba(31, 38, 135, 0.5);
+            --border-radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        100% {
-          opacity: 1;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
 
-      /* Styling for content */
-      h1 {
-        font-size: 3em;
-        margin-bottom: 20px;
-      }
+        html {
+            scroll-behavior: smooth;
+        }
 
-      p {
-        font-size: 1.5em;
-        margin-bottom: 40px;
-      }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+        }
 
-      .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px; /* Add space between buttons */
-      }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
 
-      .welcome-btn {
-        display: inline-block;
-        padding: 15px 30px;
-        background-color: #557596;
-        color: white;
-        text-decoration: none;
-        font-size: 1.2em;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-      }
+        /* Background Effects */
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            z-index: 1;
+            animation: overlayMove 20s ease-in-out infinite;
+        }
 
-      .welcome-btn:hover {
-        background-color: #080808;
-      }
+        @keyframes overlayMove {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(180deg); }
+        }
+
+        /* Floating Elements */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+
+        .shape-4 {
+            width: 70px;
+            height: 70px;
+            bottom: 20%;
+            right: 10%;
+            animation-delay: -6s;
+        }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateY(-30px) rotate(180deg);
+                opacity: 0.8;
+            }
+        }
+
+        /* Main Container */
+        .container {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        /* Welcome Card */
+        .welcome-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-heavy);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Logo/Icon */
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Typography */
+        .welcome-title {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* User Type Selection */
+        .user-selection {
+            margin-bottom: 2rem;
+        }
+
+        .selection-title {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .user-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem 1.5rem;
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .user-btn:hover::before {
+            left: 100%;
+        }
+
+        .user-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-light);
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .user-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .patient-btn .btn-icon {
+            color: #4facfe;
+        }
+
+        .admin-btn .btn-icon {
+            color: #f093fb;
+        }
+
+        .btn-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Quick Access */
+        .quick-access {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .quick-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .quick-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .quick-link i {
+            font-size: 1rem;
+        }
+
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .loading-content {
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 2rem;
+                margin: 1rem;
+            }
+            
+            .button-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .user-btn {
+                padding: 1.5rem;
+            }
+            
+            .quick-access {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 1.5rem;
+            }
+            
+            .welcome-icon {
+                font-size: 3rem;
+            }
+            
+            .user-btn {
+                padding: 1.25rem;
+            }
+            
+            .btn-icon {
+                font-size: 2rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .user-btn:focus {
+            outline: 2px solid var(--primary-color);
+            outline-offset: 2px;
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <div class="container">
-      <div>
-        <h1>Welcome to Our Website!</h1>
-        <p>We are glad to have you here. Explore and enjoy our content!</p>
-        <div class="button-container">
-          <a href="/login"
-            ><button type="submit" class="welcome-btn">user</button></a
-          >
-          <a href="/doctorlogin"
-            ><button type="submit" class="welcome-btn">admin</button></a
-          >
-        </div>
-      </div>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
-  </body>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Redirecting you to the portal...</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="welcome-card">
+            <div class="welcome-icon">
+                <i class="fas fa-hospital-alt" aria-hidden="true"></i>
+            </div>
+            
+            <h1 class="welcome-title">Welcome to Healthcare Portal</h1>
+            <p class="welcome-subtitle">
+                Your trusted partner in health management. Choose your access type to get started with personalized healthcare solutions.
+            </p>
+
+            <div class="user-selection">
+                <h2 class="selection-title">Select Your Access Type</h2>
+                
+                <div class="button-grid">
+                  <a href="/login" class="user-btn patient-btn" data-type="patient">
+                      <div class="btn-icon">
+                          <i class="fas fa-user"></i>
+                      </div>
+                      <div class="btn-title">Patient Portal</div>
+                      <div class="btn-description">
+                          Access your health records, appointments, and personalized care dashboard
+                      </div>
+                  </a>
+      
+                  <a href="/doctorlogin" class="user-btn admin-btn" data-type="admin">
+                      <div class="btn-icon">
+                          <i class="fas fa-user-md"></i>
+                      </div>
+                      <div class="btn-title">Healthcare Provider</div>
+                      <div class="btn-description">
+                          Access administrative tools, patient management, and clinical dashboards
+                      </div>
+                  </a>
+              </div>
+            </div>
+
+            <div class="quick-access">
+                <a href="/about" class="quick-link">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span>About Us</span>
+                </a>
+                <a href="/support" class="quick-link">
+                    <i class="fas fa-headset" aria-hidden="true"></i>
+                    <span>Support</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class WelcomePortal {
+            constructor() {
+                this.initializeApp();
+                this.setupEventListeners();
+                this.setupAccessibility();
+            }
+
+            initializeApp() {
+                this.loadingOverlay = document.getElementById('loadingOverlay');
+                this.userButtons = document.querySelectorAll('.user-btn');
+                this.quickLinks = document.querySelectorAll('.quick-link');
+                
+                // Add entrance animation delay
+                this.addEntranceAnimations();
+            }
+
+            setupEventListeners() {
+                // Enhanced button interactions
+                this.userButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => this.handleUserSelection(e));
+                    btn.addEventListener('mouseenter', (e) => this.handleHover(e));
+                    btn.addEventListener('mouseleave', (e) => this.handleHoverEnd(e));
+                });
+
+                // Quick links
+                this.quickLinks.forEach(link => {
+                    link.addEventListener('click', (e) => this.handleQuickLink(e));
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+                // Touch events for mobile
+                this.setupTouchEvents();
+            }
+
+            handleUserSelection(e) {
+              e.preventDefault();
+              const button = e.currentTarget;
+              const userType = button.dataset.type;
+              const href = button.getAttribute('href');
+          
+              // Visual feedback
+              button.style.transform = 'translateY(-2px) scale(0.98)';
+              setTimeout(() => {
+                  button.style.transform = 'translateY(-5px) scale(1)';
+              }, 100);
+          
+              // Analytics tracking
+              this.trackUserSelection(userType);
+          
+              // Show loading and redirect
+              this.showLoading();
+          
+              setTimeout(() => {
+                  window.location.href = href;  // 🔥 Fix applied here
+              }, 1500);
+          }
+          
+
+            handleQuickLink(e) {
+                e.preventDefault();
+                const link = e.currentTarget;
+                const href = link.getAttribute('href');
+                
+                // Visual feedback
+                link.style.transform = 'translateY(-2px) scale(0.95)';
+                setTimeout(() => {
+                    link.style.transform = 'translateY(-2px) scale(1)';
+                }, 150);
+
+                // Simulate navigation
+                setTimeout(() => {
+                    console.log(`Navigating to: ${href}`);
+                }, 300);
+            }
+
+            handleHover(e) {
+                const button = e.currentTarget;
+                const icon = button.querySelector('.btn-icon');
+                
+                // Enhanced hover animation
+                icon.style.transform = 'scale(1.1) rotate(5deg)';
+                icon.style.transition = 'transform 0.3s ease';
+            }
+
+            handleHoverEnd(e) {
+                const button = e.currentTarget;
+                const icon = button.querySelector('.btn-icon');
+                
+                icon.style.transform = 'scale(1) rotate(0deg)';
+            }
+
+            showLoading() {
+                this.loadingOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+
+            hideLoading() {
+                this.loadingOverlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+
+            setupTouchEvents() {
+                // Touch feedback for mobile
+                this.userButtons.forEach(btn => {
+                    btn.addEventListener('touchstart', () => {
+                        btn.style.transform = 'translateY(-2px) scale(0.98)';
+                    });
+                    
+                    btn.addEventListener('touchend', () => {
+                        setTimeout(() => {
+                            btn.style.transform = 'translateY(-5px) scale(1)';
+                        }, 100);
+                    });
+                });
+            }
+
+            handleKeydown(e) {
+                if (e.key === 'Enter' && e.target.classList.contains('user-btn')) {
+                    e.target.click();
+                }
+                
+                if (e.key === 'Escape' && this.loadingOverlay.style.display === 'flex') {
+                    this.hideLoading();
+                }
+            }
+
+            setupAccessibility() {
+                // Add ARIA labels
+                this.userButtons.forEach(btn => {
+                    const type = btn.dataset.type;
+                    btn.setAttribute('aria-label', `Access ${type} portal`);
+                });
+
+                // Focus management
+                document.addEventListener('focusin', (e) => {
+                    if (e.target.classList.contains('user-btn')) {
+                        e.target.style.outline = '2px solid var(--primary-color)';
+                        e.target.style.outlineOffset = '2px';
+                    }
+                });
+
+                document.addEventListener('focusout', (e) => {
+                    if (e.target.classList.contains('user-btn')) {
+                        e.target.style.outline = 'none';
+                    }
+                });
+            }
+
+            addEntranceAnimations() {
+                const elements = document.querySelectorAll('.welcome-icon, .welcome-title, .welcome-subtitle, .user-btn, .quick-link');
+                elements.forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(20px)';
+                    el.style.transition = 'all 0.6s ease-out';
+                    
+                    setTimeout(() => {
+                        el.style.opacity = '1';
+                        el.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }
+
+            trackUserSelection(userType) {
+                // Analytics placeholder
+                console.log(`User selected: ${userType}`);
+                
+                // Real implementation would send to analytics service
+                // gtag('event', 'user_type_selection', { user_type: userType });
+            }
+        }
+
+        // Initialize the portal
+        document.addEventListener('DOMContentLoaded', () => {
+            new WelcomePortal();
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            console.log('Page load time:', perfData.loadEventEnd - perfData.loadEventStart);
+        });
+    </script>
+</body>
 </html>
